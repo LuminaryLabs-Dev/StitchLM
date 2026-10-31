@@ -1,0 +1,41 @@
+# StitchLM — Agent Memory
+
+Updated: 2026-10-31
+Repository: https://github.com/LuminaryLabs-Dev/StitchLM
+Maintenance register: Upkeep / MNT-413
+Baseline prior to documentation: `7767a714fae44852bb7cc2fd56d79388f236fb78` on `main`
+Source evidence: original repository root held only a 10-character `README.md` containing `# StitchLM`.
+
+## Objective
+
+Develop heterogeneous distributed inference: many phones, PCs and other devices measure available compute, RAM, storage, bandwidth, latency and thermal headroom and offer only the useful share they can provide to the execution of one LLM. Contributing tasks may differ by device. The desired scale is approximately 50 participating devices, not an assumed performance guarantee.
+
+## Decisions / direction
+
+- Project name: StitchLM.
+- Preferred scheduling foundation: vLLM; custom layer/tensor execution orchestration is required.
+- Dynamic resource contributions: layer and weight placement, attention-head/KV-head work, QKV and output projections, MLP shards, local KV attention, correct global reductions, MoE experts when supported, speculative work where independently useful.
+- An explicit task dependency DAG and heterogeneous placement policy are required; minimal transfers and correctness dominate participation count.
+- Contributing to a single decoding stream is distinct from concurrently processing many independent requests.
+
+## Verified state versus planned capabilities
+
+CONFIRMED before this documentation phase: public GitHub repo in LuminaryLabs-Dev, default branch main, only stub README, no confirmed implementation.
+PLANNED, NOT IMPLEMENTED: vLLM adapter, coordinator, worker protocol, mobile clients, capacity probes, remote compute, distributed attention, KV migration, numerical tests, throughput benchmarks, releases and deployment.
+
+## Key technical uncertainties
+
+1. Which vLLM runtime/version and executor interfaces to extend, particularly when workers lack supported GPUs?
+2. How to implement portable CPU/mobile workers without forcing vLLM's GPU assumptions onto them.
+3. Tensor-transfer formats and activation-bandwidth economics for real phone/Wi-Fi networks.
+4. Correct numerical merging for attention and MLP partitions with mixed dtypes/quantization.
+5. KV-cache ownership, speculative decoding benefits, failure recovery and security model.
+6. Whether participating low-power devices improve single-stream tokens/s relative to baseline.
+
+## Next bounded task
+
+After documentation review and separate authorization: write a technical architecture specification and a minimal single-host/two-worker correctness experiment plan. Establish baseline metrics before claiming distributed speedups.
+
+## Handoff rules
+
+Keep `README.md`, `AGENTS.md` and this file consistent. Capture tested commands, commit IDs and observed numerical results. Do not invent implemented capabilities. Check the live Upkeep checkout before a repository write. No non-documentation code was authorized or produced by this phase.
