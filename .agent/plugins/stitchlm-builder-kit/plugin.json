@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "stitchlm-builder-kit",
+  "version": "0.1.0",
+  "description": "Define, build and validate one authorized StitchLM development outcome; not an inference backend.",
+  "author": {
+    "name": "Luminary Labs"
+  }
+}

@@ -24,6 +24,11 @@ Scope: `LuminaryLabs-Dev/StitchLM`. Read `README.md` and `.agent/memory.md` befo
 - Security and privacy apply to weights, activations, prompts, caches and peer connections.
 - Do not promise performance gains until they are benchmarked against the same model, hardware budget, batch size and workload.
 
-## Documentation-only initial pass
+## Historical documentation-only initial pass
 
 Permitted: README, AGENTS.md, .agent/memory.md. Excluded: runtime code, CI, binaries, licensing guesses, third-party submodules, deployments, new branches, tags, and releases. Remaining engineering design decisions require a new approved phase.
+
+
+## Authorized development-plugin phase (2026-11-01)
+
+The user separately authorized a development kit analogous to Arcade/Glass and delivery to main. `.agent/plugins/stitchlm-builder-kit/` is that harness; `.agents/plugins/marketplace.json` is discovery and `tests/stitchlm-builder.test.mjs` tests synthetic orchestration. Read the plugin README and engineering contract for kit work. The historical initial-pass exclusions are not a ban on this specifically authorized harness phase. Inference runtime, vLLM backend, peers, model downloads, deployment and releases remain unimplemented and require separate authorization. Future outcomes must still satisfy the operating contract; passing harness tests grants no new authority.

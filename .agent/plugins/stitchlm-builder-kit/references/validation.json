@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-01",
+  "scope": "Synthetic development harness only; not model inference",
+  "node": "v24.22.1",
+  "codex": "0.166.0-alpha.1",
+  "checks": [
+    {
+      "command": "node --check .agent/plugins/stitchlm-builder-kit/scripts/stitchlm-builder.mjs",
+      "result": "passed"
+    },
+    {
+      "command": "STITCHLM_TEST_INSTALLATION=<verified native receipt> node --test tests/stitchlm-builder.test.mjs",
+      "result": "36 passed, 0 failed (with verified native installation receipt; all inference/evidence-contract test data synthetic)"
+    },
+    {
+      "command": "CODEX_HOME=<isolated temporary directory> codex plugin marketplace add /workspace/shared/stitchlm-builder-kit",
+      "result": "stitchlm registered"
+    },
+    {
+      "command": "CODEX_HOME=<isolated temporary directory> codex plugin add stitchlm-builder-kit@stitchlm --json",
+      "result": "installed 0.1.0"
+    },
+    {
+      "command": "CODEX_HOME=<isolated temporary directory> codex plugin list --json",
+      "result": "installed and enabled"
+    }
+  ],
+  "warnings": [
+    "Codex declined PATH alias helpers under temporary CODEX_HOME; plugin commands succeeded"
+  ],
+  "notPerformed": [
+    "Fresh model/session invocation",
+    "Real model inference",
+    "Numerical or device benchmark",
+    "vLLM integration",
+    "Peer or hardware execution",
+    "Deployment or release"
+  ],
+  "ci": "No workflow at inspected baseline; local checks only"
+}

@@ -1,0 +1,10 @@
+{
+  "name": "stitchlm-builder-kit",
+  "version": "0.1.0",
+  "description": "Evidence-gated StitchLM development, not a distributed inference runtime.",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "StitchLM Builder Kit",
+    "shortDescription": "One scoped experiment, resumable and evidence-gated"
+  }
+}

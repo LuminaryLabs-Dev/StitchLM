@@ -39,3 +39,10 @@ After documentation review and separate authorization: write a technical archite
 ## Handoff rules
 
 Keep `README.md`, `AGENTS.md` and this file consistent. Capture tested commands, commit IDs and observed numerical results. Do not invent implemented capabilities. Check the live Upkeep checkout before a repository write. No non-documentation code was authorized or produced by this phase.
+
+
+## Development-kit phase — 2026-11-01
+
+User separately requested a kit analogous to Arcade/Glass and push to main when ready. Baseline: `9e0ace8877c1095ebc942e8f1bbe2cd5817756c4`. MNT-413 was Needs Review with no active owner at preflight. Implemented repository-local StitchLM Builder Kit: portable/compatibility manifests, seven explicit skills, three-stage resumable CLI, source/artifact integrity, locks/recovery, bounded iteration and conservative evidence gates. See plugin references/implementation-plan.md and references/validation.json for scope and actual checks. This changes the historical docs-only state to documentation plus development harness, NOT an inference implementation. No new vLLM backend, device work, numerical/model benchmarks, model session, credentials/downloads, deployment, tags/releases or tracker changes.
+
+Next: select one separately authorized build-ready experiment/outcome from canonical tasking; single-host baseline then two-worker correctness precedes scale. Missing model/hardware is a blocker. Future run state belongs outside tracked source and must preserve full intent/pins.

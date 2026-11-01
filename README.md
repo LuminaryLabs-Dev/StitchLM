@@ -2,7 +2,7 @@
 
 **StitchLM** is a planned heterogeneous distributed LLM inference system: phones, laptops, desktops, and servers should be able to advertise their available capacity and contribute appropriate parts of a **single model's inference**. Contributions may include model-weight placement, transformer-layer execution, attention-head groups, MLP partitions, KV-cache hosting with local attention, and partial tensor reductions.
 
-> **Status (2026-10-31):** architecture and documentation only. This repository does not yet contain an inference runtime, benchmarks, an integrated vLLM backend, distributed workers, tests, or validated throughput measurements.
+> **Status (2026-11-01):** architecture documentation plus a repository-local development harness. This repository does not yet contain an inference runtime, inference benchmarks, an integrated vLLM backend, distributed workers, or validated throughput measurements. Harness tests are synthetic, not inference evidence.
 
 ## Intent
 
@@ -55,3 +55,10 @@ Each milestone requires measurable acceptance evidence, not only source-code pre
 ## Governance
 
 Follow the [Luminary Framework](https://docs.google.com/document/d/1lZLgr2A99EBzMwoLl4iEY7NiFVFG6LjU8snI2eP3ZWI/edit), [Upkeep Guide](https://docs.google.com/document/d/1nIacfvsNnmFg0kxZxs-tU1XF7w7d97HcfN3JEBOCGpw/edit), and the [live Upkeep register](https://docs.google.com/spreadsheets/d/11viRvCFI9qTmsuEYfv9lGBI8edaZFRJNE9b7OQDVz-0/edit). Maintenance reference: **MNT-413**. The repository contains technical source and documentation; project/ticket state remains in its authoritative Luminary tracker. Do not infer approval for dependency, code, deployment, or release changes from this document.
+
+
+## Development plugin
+
+[StitchLM Builder Kit](.agent/plugins/stitchlm-builder-kit/README.md) guides one authorized outcome through definition, candidate build, and validation/delivery preparation. It provides explicit skills, resumable CLI state, evidence gates, local discovery and harness tests—not a vLLM backend or working distributed inference system. See its README for install, commands and honest validation limits.
+
+Repository-plugin guidance: [A Guide To ChatGPT Plugins In Repos](https://docs.google.com/document/d/1WYRMuGgxbB4jwV87Cvx01vqJ9oFRtlVIGTlLkLqzwKo/edit).
