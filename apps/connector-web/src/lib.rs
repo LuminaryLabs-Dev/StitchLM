@@ -86,10 +86,15 @@ pub async fn connect(pairing_code: String, name: String, memory_mb: usize) -> Re
     drop(bytes);
     let endpoint = format!("/api/connectors/{}", assignment.connector_id);
     wait_ready_web(&endpoint, &assignment.lease_token).await?;
-    scope.post_message(&JsValue::from_str(&format!(
-        "Ready. Computing real model blocks {}..{}",
-        assignment.range.start, assignment.range.end
-    )))?;
+    let ready_message = if assignment.range.is_empty() {
+        "Ready. Computing stateless Bonsai matrix shards; model state stays on host".to_string()
+    } else {
+        format!(
+            "Ready. Computing real model blocks {}..{}",
+            assignment.range.start, assignment.range.end
+        )
+    };
+    scope.post_message(&JsValue::from_str(&ready_message))?;
     loop {
         let shard_json = web::text(
             &format!("{endpoint}/shard-job"),
@@ -118,7 +123,12 @@ pub async fn connect(pairing_code: String, name: String, memory_mb: usize) -> Re
             {
                 return Err(JsValue::from_str("invalid shard transfer"));
             }
-            let response = web::request(&expected, &assignment.lease_token, "GET", None).await?;
+            let response =
+                web::request_allow_conflict(&expected, &assignment.lease_token, "GET", None)
+                    .await?;
+            if response.status() == 409 {
+                continue;
+            }
             let length = response
                 .headers()
                 .get("Content-Length")?

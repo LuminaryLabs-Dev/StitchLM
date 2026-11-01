@@ -69,3 +69,28 @@ The final lifecycle tests cancel an active request, keep the existing native or
 browser connector alive, wait for cache reset/readiness, and require nonzero
 remote-block execution on the next generation. A host-local fallback alone does
 not satisfy this recovery check.
+
+## Full pinned Bonsai extension
+
+The current full-model receipt is under `evidence/full-bonsai/`. It is separate
+from the historical v0.0.1 projection-only receipt. The full-model suite includes
+all 64 layers, raw-token reference fixtures, ordinary chat-template generation,
+actual native/browser matrix participation and cancellation/fresh-request replay.
+See `tests/bonsai_generation/README.md` for commands and the explicit numerical
+gate. Source/binary identities and any development-build distinctions belong in
+the receipt; do not imply every historical run used the final binary.
+
+The official legacy reference uses Q8 activation dot products; the Rust graph
+uses F32. Named-fixture greedy equality plus bounded full-logit error is evidence
+for those fixtures, not proof of all prompts, long contexts or production uptime.
+Real-device LAN, GPU/Metal acceleration and throughput improvement remain separate.
+
+The full-model fault test exposed a cancellation race between polling a matrix
+command and fetching its weights: stale requests previously returned400and could
+exit the connector. The corrected protocol returns409for stale/cancelled/expired
+work, which native and browser adapters discard without exiting. The targeted
+browser test intercepts a real outgoing weight request, cancels the real host
+request, then continues the original fetch and observes its real409response. It
+does not mock model data or forge successful inference. The same connectors must
+then complete a fresh full-model request. This is distinct from LFM cache-reset
+cancellation and from the ordinary successful matrix-splitting tests.

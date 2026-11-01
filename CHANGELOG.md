@@ -9,5 +9,12 @@
 - Added safe GGUF inspection and a real-weight Bonsai projection-splitting probe.
 - Preserved the repository-local builder kit and its independent acceptance gates.
 
-Complete Bonsai inference, arbitrary-GGUF execution, automatic optimal scheduling
-and physical heterogeneous-device acceptance remain unproven or unimplemented.
+## Full pinned Bonsai text extension
+
+- Added the 64-layer Qwen3.5 text graph, local streamed tensor provider and pinned tokenizer.
+- Added stateless native/WASM matrix participation during complete generation.
+- Added separate matrix-shard telemetry, request reset and cancellation checks.
+- Added full-model reference fixtures and native/browser generation tests.
+
+Arbitrary GGUF/Bonsai2 models, automatic optimal scheduling, long-context quality
+and physical heterogeneous-device acceptance remain outside the validated scope.

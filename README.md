@@ -1,7 +1,7 @@
 # StitchLM v0.0.1
 
 Rust native host and native/browser connectors that cooperate on one model's
-inference. The first verified backend runs **LiquidAI/LFM2.5-350M**. The host owns
+inference. The original backend runs **LiquidAI/LFM2.5-350M**; the pinned Bonsai text backend is described below. The host owns
 model selection, embeddings, sampling and coordination; connectors execute real
 contiguous decoder blocks through the same Rust core, compiled to native or WASM.
 
@@ -22,22 +22,17 @@ full small reference model; this is not yet host-memory offload.
 
 ## Bonsai and GGUF status
 
-The new [shard contract](docs/shard-contract.md) connects immutable definitions,
-execution records and measured device profiles to live native/WASM command buffers.
-Row and column plans, reference comparison, live status and sealed checkpoints are
-available in the host console.
+The exact pinned **Ternary Bonsai 27B Abliterated** now has a text-only Rust
+backend covering all 64 layers, attention/recurrent state and streamed packed
+weights. Native and browser connectors can execute its matrix shards through the
+existing command buffer. See [Bonsai runtime](docs/bonsai-runtime.md) for setup,
+limits and full-model validation evidence. This is not Bonsai2 or universal GGUF
+support. Other architectures remain inspection-only.
 
-The requested **Ternary-Bonsai-27B-Abliterated-LowDeg-Q2_0.gguf** has been downloaded
-and checksum verified. Its actual packed projection was split across four native processes and a mixed
-two-native/two-browser group, using multi-round row and column plans with exact
-reference agreement in the recorded tests. Native processes had 1 GB address-space
-limits; browser process memory was not hard-capped. That is an
-operation-level proof, **not complete Bonsai text generation**.
-
-The file uses Qwen3.5 hybrid attention and a legacy Prism group-128 encoding under
-GGUF type 42. Modern upstream type 42 uses a different layout. This build inspects
-GGUF safely and refuses unsupported full-model execution rather than producing
-wrong text. It does **not** support every GGUF. See [compatibility](docs/gguf-compatibility.md).
+The [shard contract](docs/shard-contract.md) still separates immutable definitions,
+execution records and measured device profiles. Its diagnostic projection tests
+are not a substitute for the separate whole-model tests. This legacy artifact
+uses group 128 under type 42; modern upstream type 42 has a different layout.
 
 ## Run it
 

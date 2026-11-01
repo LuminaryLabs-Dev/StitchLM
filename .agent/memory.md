@@ -73,7 +73,7 @@ measured placement costs were added. Lossless serde_json float parsing and a
 specific sealed-checkpoint regression test address it. Do not remove that feature
 or assume a checksum over parsed floating metadata survives a lossy parser.
 
-Current boundaries: complete Bonsai/Qwen3.5 generation and arbitrary GGUF backends
+Boundaries at the initial delivery: complete Bonsai/Qwen3.5 generation and arbitrary GGUF backends
 are not implemented. Attention merge and state-ownership rules have scoped unit
 tests, not arbitrary cache export/migration proof. The projection interface uses
 capacity calibration with measured cost ranking, not a globally optimal automatic
@@ -91,3 +91,27 @@ Continuation: preserve the tested baseline and its evidence, validate a real
 second device over trusted HTTPS, and implement further model/kernel support only
 with independent full-output reference checks. Reconcile the stale canonical Drive
 handoff through an authorized record update; do not fabricate a company LUM ID.
+
+
+## Full pinned Bonsai text phase — 2026-11-01
+
+The user separately authorized the full model engine, sandbox tests and main
+push. The new text graph implements all 64 layers of the exact pinned legacy
+Ternary Bonsai 27B Abliterated artifact, not Bonsai2. It streams local matrix
+weights and keeps KV/convolution/GatedDeltaNet state on the host. Native and
+browser connectors execute stateless matrix shards. LFM retains its separate
+contiguous-block path. No AI implementation workers were used.
+
+Reference validation uses the official frozen Prism legacy commit
+b06f74a9ea9fa5eaf751f7d575bf766486b4ae62, with matching tokenization and F32 KV.
+Rust arithmetic and the reference's quantized activation dot products differ;
+use the explicit numerical gate and exact named-fixture continuations, not a
+bitwise-logit claim. See current full-model evidence for final run outcomes.
+
+This is a correctness and low-memory capacity baseline, not an interactive speed
+claim. The distributed path rereads/transfers most matrix weights each token and
+retains a host reference check. Native CPU pacing now uses measured kernel time
+rather than multiplying network wait time. Browser RAM is not hard-capped.
+Physical devices/LAN, long-context quality, vision, Bonsai2, arbitrary GGUFs and
+durable full-model cache migration remain outside the verified scope. No tags,
+releases, deployments or Drive/tracker edits are implied by source delivery.

@@ -1,0 +1,90 @@
+{
+  "synthetic_weights": false,
+  "full_bonsai_generation": true,
+  "native_connectors": 4,
+  "browser_connectors": 0,
+  "native_address_cap_bytes": 1000000000,
+  "browser_process_cap_enforced": false,
+  "tests": {
+    "full_generation": {
+      "events": [
+        {
+          "kind": "token",
+          "text": ",",
+          "token": 11,
+          "tokens": 1,
+          "elapsed_ms": 290084.33962100005,
+          "remote_blocks": 0,
+          "remote_shards": 4147
+        },
+        {
+          "kind": "token",
+          "text": ", I",
+          "token": 353,
+          "tokens": 2,
+          "elapsed_ms": 622850.519401,
+          "remote_blocks": 0,
+          "remote_shards": 8294
+        },
+        {
+          "kind": "done",
+          "text": ", I",
+          "token": null,
+          "tokens": 2,
+          "elapsed_ms": 622857.047705,
+          "remote_blocks": 0,
+          "remote_shards": 8294
+        }
+      ],
+      "tokens": [
+        11,
+        353
+      ],
+      "matches_pinned_reference": true,
+      "split_axis": "rows"
+    }
+  },
+  "passed": true,
+  "process_metrics": [
+    {
+      "max_rss_bytes": 1069039616,
+      "max_virtual_bytes": 1727524864,
+      "cpu_seconds": 228.82,
+      "role": "host",
+      "sampled_seconds": 638.7542476730014,
+      "average_single_core_cpu_percent": 35.822853755352284
+    },
+    {
+      "max_rss_bytes": 13553664,
+      "max_virtual_bytes": 19861504,
+      "cpu_seconds": 34.53,
+      "role": "native-connector",
+      "sampled_seconds": 625.2608045789966,
+      "average_single_core_cpu_percent": 5.522495532604173
+    },
+    {
+      "max_rss_bytes": 13742080,
+      "max_virtual_bytes": 20684800,
+      "cpu_seconds": 34.63,
+      "role": "native-connector",
+      "sampled_seconds": 625.2607183,
+      "average_single_core_cpu_percent": 5.538489623041461
+    },
+    {
+      "max_rss_bytes": 13357056,
+      "max_virtual_bytes": 22044672,
+      "cpu_seconds": 35.76,
+      "role": "native-connector",
+      "sampled_seconds": 625.2607113699996,
+      "average_single_core_cpu_percent": 5.719214297288372
+    },
+    {
+      "max_rss_bytes": 13615104,
+      "max_virtual_bytes": 20361216,
+      "cpu_seconds": 37.57,
+      "role": "native-connector",
+      "sampled_seconds": 625.2607173900033,
+      "average_single_core_cpu_percent": 6.008693486586956
+    }
+  ]
+}

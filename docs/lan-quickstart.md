@@ -2,7 +2,8 @@
 
 This is the first physical-device acceptance procedure, not a claim that a real
 LAN or your operating system has already passed. The verified chat backend is
-LFM2.5-350M. Full Bonsai text generation is not implemented.
+LFM2.5-350M. For the pinned Bonsai text backend, use the model/tokenizer
+commands in [Bonsai runtime](bonsai-runtime.md) with the same TLS setup.
 
 ## 1. Pull and build on the host
 

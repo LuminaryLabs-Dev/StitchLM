@@ -116,10 +116,14 @@ async fn main() -> Result<()> {
     if !wait_ready(&client, &endpoint, &assignment.lease_token).await? {
         return Ok(());
     }
-    println!(
-        "Ready: real model blocks {}..{}, memory admission {}MiB",
-        assignment.range.start, assignment.range.end, assignment.memory_budget_mb
-    );
+    if assignment.range.is_empty() {
+        println!("Ready: stateless Bonsai matrix shards, model state stays on host");
+    } else {
+        println!(
+            "Ready: real model blocks {}..{}, memory admission {}MiB",
+            assignment.range.start, assignment.range.end, assignment.memory_budget_mb
+        );
+    }
     loop {
         let cycle = std::time::Instant::now();
         let shard: Option<stitch_core::shards::WorkEnvelope> = client
@@ -149,12 +153,15 @@ async fn main() -> Result<()> {
                     && envelope.definition.tensor.byte_length <= 256 * 1024 * 1024,
                 "invalid shard transfer"
             );
-            let mut response = client
+            let response = client
                 .get(format!("{base}{}", envelope.weights_path))
                 .bearer_auth(&assignment.lease_token)
                 .send()
-                .await?
-                .error_for_status()?;
+                .await?;
+            if response.status() == reqwest::StatusCode::CONFLICT {
+                continue;
+            }
+            let mut response = response.error_for_status()?;
             let mut weights = Vec::with_capacity(envelope.definition.tensor.byte_length as usize);
             while let Some(chunk) = response.chunk().await? {
                 ensure!(
@@ -185,7 +192,7 @@ async fn main() -> Result<()> {
                 continue;
             }
             response.error_for_status()?;
-            tokio::time::sleep(cycle.elapsed().mul_f64(
+            tokio::time::sleep(compute.mul_f64(
                 100.0 / a.cpu_percent.min(envelope.definition.budget.cpu_percent) as f64 - 1.0,
             ))
             .await;

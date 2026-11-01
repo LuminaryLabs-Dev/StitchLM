@@ -213,6 +213,16 @@ pub struct GenerateRequest {
     pub max_tokens: usize,
     #[serde(default)]
     pub local_only: bool,
+    #[serde(default)]
+    pub raw_prompt: bool,
+    #[serde(default)]
+    pub split_axis: Option<String>,
+    #[serde(default)]
+    pub preferred_chunk: Option<u64>,
+    #[serde(default)]
+    pub connector_count: Option<usize>,
+    #[serde(default)]
+    pub working_memory_bytes: Option<u64>,
 }
 fn default_tokens() -> usize {
     32
@@ -226,6 +236,8 @@ pub struct GenerationEvent {
     pub tokens: usize,
     pub elapsed_ms: f64,
     pub remote_blocks: usize,
+    #[serde(default)]
+    pub remote_shards: usize,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ConnectorStatus {

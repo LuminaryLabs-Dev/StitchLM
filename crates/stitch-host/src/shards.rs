@@ -152,7 +152,9 @@ impl ShardService {
                 .records
                 .get(id)
                 .context("pending record missing")?;
-            if !matches!(record.status, Status::Dispatched | Status::Running) {
+            if !matches!(record.status, Status::Dispatched | Status::Running)
+                || now_ms() > record.command.lease_expires_ms
+            {
                 return Ok(None);
             }
             if record.status == Status::Dispatched {
@@ -224,6 +226,17 @@ pub fn run_projection(
     participants: Vec<(String, String, usize)>,
     service: Arc<Mutex<ShardService>>,
 ) -> Result<ProjectionReport> {
+    run_projection_checked(request, source, participants, service, || Ok(()))
+}
+pub fn run_projection_checked(
+    request: ProjectionRequest,
+    source: MatrixSource,
+    participants: Vec<(String, String, usize)>,
+    service: Arc<Mutex<ShardService>>,
+    check_cancel: impl Fn() -> Result<()>,
+) -> Result<ProjectionReport> {
+    check_cancel()?;
+
     ensure!(
         (1..=4).contains(&request.connector_count) && participants.len() >= request.connector_count,
         "requested ready connector count unavailable"
@@ -254,6 +267,7 @@ pub fn run_projection(
             })
             .collect::<Vec<f32>>()
     };
+    check_cancel()?;
     let host_reference_ms = reference_start.elapsed().as_secs_f64() * 1000.;
     let request_id = super::secret();
     let chosen: Vec<_> = participants
@@ -373,6 +387,7 @@ pub fn run_projection(
     }
     let result = (|| -> Result<ProjectionReport> {
         loop {
+            check_cancel()?;
             let mut s = service.lock().unwrap();
             ensure!(
                 s.active_request.as_deref() == Some(&request_id),

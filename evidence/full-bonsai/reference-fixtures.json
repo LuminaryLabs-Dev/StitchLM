@@ -1,0 +1,179 @@
+{
+  "hello": {
+    "passed": true,
+    "independent_reference": true,
+    "reference_commit": "b06f74a9ea9fa5eaf751f7d575bf766486b4ae62",
+    "input_tokens": [
+      9419
+    ],
+    "generated_tokens": [
+      11,
+      353
+    ],
+    "text": ", I",
+    "positions": [
+      {
+        "position": 0,
+        "same_top1": true,
+        "cosine": 0.9999793422284661,
+        "normalized_rmse": 0.008078133392029474,
+        "maximum_absolute_error": 0.15575361251831055
+      },
+      {
+        "position": 1,
+        "same_top1": true,
+        "cosine": 0.9999881482784506,
+        "normalized_rmse": 0.005287763900697948,
+        "maximum_absolute_error": 0.08122897148132324
+      }
+    ],
+    "gate": {
+      "cosine_minimum": 0.999,
+      "normalized_rmse_maximum": 0.02,
+      "greedy_match_required": true
+    },
+    "limitation": "Named short fixtures only; F32 Rust and Q8-activation reference logits are not bitwise identical."
+  },
+  "math": {
+    "passed": true,
+    "independent_reference": true,
+    "reference_commit": "b06f74a9ea9fa5eaf751f7d575bf766486b4ae62",
+    "input_tokens": [
+      17,
+      10,
+      17,
+      28
+    ],
+    "generated_tokens": [
+      19,
+      248046,
+      198
+    ],
+    "text": "4\n",
+    "positions": [
+      {
+        "position": 0,
+        "same_top1": true,
+        "cosine": 0.9999807977256665,
+        "normalized_rmse": 0.006420455703848593,
+        "maximum_absolute_error": 0.11017024517059326
+      },
+      {
+        "position": 1,
+        "same_top1": true,
+        "cosine": 0.9999735657513917,
+        "normalized_rmse": 0.007804092931998258,
+        "maximum_absolute_error": 0.11209088563919067
+      },
+      {
+        "position": 2,
+        "same_top1": true,
+        "cosine": 0.9999861438363872,
+        "normalized_rmse": 0.0053043999951096,
+        "maximum_absolute_error": 0.08714711666107178
+      },
+      {
+        "position": 3,
+        "same_top1": true,
+        "cosine": 0.9999803795423978,
+        "normalized_rmse": 0.006357313593380441,
+        "maximum_absolute_error": 0.0808900035917759
+      },
+      {
+        "position": 4,
+        "same_top1": true,
+        "cosine": 0.9999892102981451,
+        "normalized_rmse": 0.004675666709789223,
+        "maximum_absolute_error": 0.07275056838989258
+      },
+      {
+        "position": 5,
+        "same_top1": true,
+        "cosine": 0.999980497398178,
+        "normalized_rmse": 0.006454515138033965,
+        "maximum_absolute_error": 0.10118323564529419
+      }
+    ],
+    "gate": {
+      "cosine_minimum": 0.999,
+      "normalized_rmse_maximum": 0.02,
+      "greedy_match_required": true
+    },
+    "limitation": "Named short fixtures only; F32 Rust and Q8-activation reference logits are not bitwise identical."
+  },
+  "france": {
+    "passed": true,
+    "independent_reference": true,
+    "reference_commit": "b06f74a9ea9fa5eaf751f7d575bf766486b4ae62",
+    "input_tokens": [
+      760,
+      6511,
+      314,
+      9338,
+      369
+    ],
+    "generated_tokens": [
+      11751,
+      13,
+      248046
+    ],
+    "text": " Paris.",
+    "positions": [
+      {
+        "position": 0,
+        "same_top1": true,
+        "cosine": 0.9999909931177791,
+        "normalized_rmse": 0.004437837248644639,
+        "maximum_absolute_error": 0.08725905418395996
+      },
+      {
+        "position": 1,
+        "same_top1": true,
+        "cosine": 0.9999864682219892,
+        "normalized_rmse": 0.005218876408461396,
+        "maximum_absolute_error": 0.10113048553466797
+      },
+      {
+        "position": 2,
+        "same_top1": true,
+        "cosine": 0.9999898905034165,
+        "normalized_rmse": 0.0045270685727135,
+        "maximum_absolute_error": 0.07944583892822266
+      },
+      {
+        "position": 3,
+        "same_top1": true,
+        "cosine": 0.9999912802229641,
+        "normalized_rmse": 0.004345249124635317,
+        "maximum_absolute_error": 0.08497858047485352
+      },
+      {
+        "position": 4,
+        "same_top1": true,
+        "cosine": 0.9999892022368858,
+        "normalized_rmse": 0.004649982832025198,
+        "maximum_absolute_error": 0.09793901443481445
+      },
+      {
+        "position": 5,
+        "same_top1": true,
+        "cosine": 0.999989629035168,
+        "normalized_rmse": 0.00479473111832071,
+        "maximum_absolute_error": 0.08486080169677734
+      },
+      {
+        "position": 6,
+        "same_top1": true,
+        "cosine": 0.9999895090423312,
+        "normalized_rmse": 0.004716923135532748,
+        "maximum_absolute_error": 0.09550094604492188
+      }
+    ],
+    "gate": {
+      "cosine_minimum": 0.999,
+      "normalized_rmse_maximum": 0.02,
+      "greedy_match_required": true
+    },
+    "limitation": "Named short fixtures only; F32 Rust and Q8-activation reference logits are not bitwise identical."
+  }
+}

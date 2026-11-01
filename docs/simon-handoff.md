@@ -14,11 +14,16 @@ select rows or columns, choose up to four ready connectors and a working-memory
 budget. Inspect the command records, measured/reference costs and checkpoint.
 This is a projection test, not a Bonsai chat endpoint.
 
+For complete pinned Bonsai text generation, follow [Bonsai runtime](bonsai-runtime.md).
+Start with a short raw completion, verify nonzero `remote_shards`, then test your
+actual LAN. This correctness baseline can be substantially slower than local
+inference because of weight traffic and conservative CPU duty.
+
 ## What remains
 
 - Validate your actual native OS and a second physical device on trusted HTTPS.
-- Complete and independently verify the Qwen3.5 hybrid attention/GatedDeltaNet
-  backend before enabling full Bonsai text generation.
+- Expand the bounded full-model fixtures to longer task-based quality and
+  endurance tests before making broad production or long-context claims.
 - Extend supported kernels operation by operation; never treat every GGUF or
   arbitrary model state as automatically shardable.
 - Treat the capacity-calibration scheduler as measured experimentation, not an

@@ -20,3 +20,18 @@ NexusEngine contract reference:
 `LuminaryLabs-Dev/NexusEngine@7d2cb0398887d4d09569cb44d20b11febb58e826`.
 The Rust adapter implements the inference JSON boundary. It does not embed or
 claim to execute the JavaScript engine runtime.
+
+## Prism legacy full-model reference
+
+The Qwen3.5 text graph and legacy packed-weight layout were checked against the
+MIT-licensed official PrismML llama.cpp legacy line at
+`b06f74a9ea9fa5eaf751f7d575bf766486b4ae62`:
+https://github.com/PrismML-Eng/llama.cpp/tree/b06f74a9ea9fa5eaf751f7d575bf766486b4ae62
+
+Its license is retained in `third-party/prism-llama/LICENSE`. The C++ implementation
+is an external validation reference, not a bundled production backend. StitchLM's
+model graph, streaming provider and shared native/WASM kernels are Rust.
+
+The separately downloaded tokenizer is pinned to official Qwen/Qwen3.5-27B
+revision `fc05daec18b0a78c049392ed2e771dde82bdf654`. No tokenizer or model weights
+are redistributed by this source repository. Their upstream licenses apply.

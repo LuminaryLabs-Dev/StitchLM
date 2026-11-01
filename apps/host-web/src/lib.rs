@@ -120,6 +120,11 @@ async fn generate() -> Result<(), JsValue> {
         prompt: ui::value("prompt")?,
         max_tokens: ui::value("tokens")?.parse().map_err(js)?,
         local_only: false,
+        raw_prompt: ui::value("prompt-mode")? == "raw",
+        split_axis: Some(ui::value("generation-axis")?),
+        preferred_chunk: None,
+        connector_count: None,
+        working_memory_bytes: None,
     };
     ui::text("output", "");
     ui::text("status", "Generating…");
@@ -146,11 +151,20 @@ async fn generate() -> Result<(), JsValue> {
             ui::text(
                 "status",
                 &format!(
-                    "{} | {} tokens | {:.2}s | {} remote block executions",
+                    "{} | {} tokens | {:.2}s | {} {}",
                     event.kind,
                     event.tokens,
                     event.elapsed_ms / 1000.,
-                    event.remote_blocks
+                    if event.remote_shards > 0 {
+                        event.remote_shards
+                    } else {
+                        event.remote_blocks
+                    },
+                    if event.remote_shards > 0 {
+                        "remote matrix shards"
+                    } else {
+                        "remote block executions"
+                    }
                 ),
             );
         }

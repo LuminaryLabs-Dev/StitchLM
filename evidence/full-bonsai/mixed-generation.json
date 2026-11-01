@@ -1,0 +1,43 @@
+{
+  "synthetic_weights": false,
+  "full_bonsai_generation": true,
+  "native_connectors": 2,
+  "browser_connectors": 2,
+  "native_address_cap_bytes": 1000000000,
+  "browser_process_cap_enforced": false,
+  "tests": {
+    "full_generation": {
+      "text": ", I",
+      "status": "done | 2 tokens | 592.56s | 5456 remote matrix shards",
+      "browser_console": true,
+      "matches_pinned_reference": true
+    }
+  },
+  "passed": true,
+  "process_metrics": [
+    {
+      "max_rss_bytes": 1096335360,
+      "max_virtual_bytes": 1829515264,
+      "cpu_seconds": 218.81,
+      "role": "host",
+      "sampled_seconds": 606.5940204959988,
+      "average_single_core_cpu_percent": 36.07190189924454
+    },
+    {
+      "max_rss_bytes": 21143552,
+      "max_virtual_bytes": 30994432,
+      "cpu_seconds": 35.96,
+      "role": "native-connector",
+      "sampled_seconds": 595.113704301999,
+      "average_single_core_cpu_percent": 6.042542751082671
+    },
+    {
+      "max_rss_bytes": 21049344,
+      "max_virtual_bytes": 29761536,
+      "cpu_seconds": 36.36,
+      "role": "native-connector",
+      "sampled_seconds": 595.113645202,
+      "average_single_core_cpu_percent": 6.109757404009495
+    }
+  ]
+}

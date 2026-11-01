@@ -80,7 +80,9 @@ that the OS/browser reported that much free physical RAM.
 - Complete LFM generation retains its validated contiguous-block protocol and
   cache-aware worker. The generic operation descriptor path is not a replacement
   for every LFM internal kernel in this version.
-- Complete Bonsai/Qwen3.5 generation and arbitrary-GGUF execution remain unsupported.
+- The pinned Bonsai text graph now calls these matrix kernels throughout full
+  generation, with all nonlinear, KV and recurrent state owned by the host.
+  Arbitrary GGUF models and distributed attention/state execution remain unsupported.
 
 ## Inspect and recover
 

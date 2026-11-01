@@ -1,0 +1,152 @@
+{
+  "full_model": true,
+  "host_local_only": true,
+  "physical_lan": false,
+  "cancellation": true,
+  "passed": true,
+  "normal_chat_template": true,
+  "fresh_request_after_cancel": true,
+  "tokens": [
+    9419,
+    0
+  ],
+  "text": "Hello!",
+  "events": [
+    {
+      "kind": "prefill 1/13",
+      "text": "",
+      "token": null,
+      "tokens": 0,
+      "elapsed_ms": 54537.916707000004,
+      "remote_blocks": 0,
+      "remote_shards": 0
+    },
+    {
+      "kind": "prefill 2/13",
+      "text": "",
+      "token": null,
+      "tokens": 0,
+      "elapsed_ms": 120164.47636300001,
+      "remote_blocks": 0,
+      "remote_shards": 0
+    },
+    {
+      "kind": "prefill 3/13",
+      "text": "",
+      "token": null,
+      "tokens": 0,
+      "elapsed_ms": 174403.26503399998,
+      "remote_blocks": 0,
+      "remote_shards": 0
+    },
+    {
+      "kind": "prefill 4/13",
+      "text": "",
+      "token": null,
+      "tokens": 0,
+      "elapsed_ms": 220569.682999,
+      "remote_blocks": 0,
+      "remote_shards": 0
+    },
+    {
+      "kind": "prefill 5/13",
+      "text": "",
+      "token": null,
+      "tokens": 0,
+      "elapsed_ms": 269769.352196,
+      "remote_blocks": 0,
+      "remote_shards": 0
+    },
+    {
+      "kind": "prefill 6/13",
+      "text": "",
+      "token": null,
+      "tokens": 0,
+      "elapsed_ms": 328301.141001,
+      "remote_blocks": 0,
+      "remote_shards": 0
+    },
+    {
+      "kind": "prefill 7/13",
+      "text": "",
+      "token": null,
+      "tokens": 0,
+      "elapsed_ms": 375999.31102300005,
+      "remote_blocks": 0,
+      "remote_shards": 0
+    },
+    {
+      "kind": "prefill 8/13",
+      "text": "",
+      "token": null,
+      "tokens": 0,
+      "elapsed_ms": 422171.405392,
+      "remote_blocks": 0,
+      "remote_shards": 0
+    },
+    {
+      "kind": "prefill 9/13",
+      "text": "",
+      "token": null,
+      "tokens": 0,
+      "elapsed_ms": 473822.295425,
+      "remote_blocks": 0,
+      "remote_shards": 0
+    },
+    {
+      "kind": "prefill 10/13",
+      "text": "",
+      "token": null,
+      "tokens": 0,
+      "elapsed_ms": 525464.850704,
+      "remote_blocks": 0,
+      "remote_shards": 0
+    },
+    {
+      "kind": "prefill 11/13",
+      "text": "",
+      "token": null,
+      "tokens": 0,
+      "elapsed_ms": 572301.298923,
+      "remote_blocks": 0,
+      "remote_shards": 0
+    },
+    {
+      "kind": "prefill 12/13",
+      "text": "",
+      "token": null,
+      "tokens": 0,
+      "elapsed_ms": 620251.748547,
+      "remote_blocks": 0,
+      "remote_shards": 0
+    },
+    {
+      "kind": "token",
+      "text": "Hello",
+      "token": 9419,
+      "tokens": 1,
+      "elapsed_ms": 685045.627616,
+      "remote_blocks": 0,
+      "remote_shards": 0
+    },
+    {
+      "kind": "token",
+      "text": "Hello!",
+      "token": 0,
+      "tokens": 2,
+      "elapsed_ms": 733170.065233,
+      "remote_blocks": 0,
+      "remote_shards": 0
+    },
+    {
+      "kind": "done",
+      "text": "Hello!",
+      "token": null,
+      "tokens": 2,
+      "elapsed_ms": 733171.741673,
+      "remote_blocks": 0,
+      "remote_shards": 0
+    }
+  ],
+  "browser_errors": []
+}

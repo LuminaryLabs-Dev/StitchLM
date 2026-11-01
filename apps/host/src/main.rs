@@ -27,6 +27,8 @@ struct Args {
     model_dir: Option<PathBuf>,
     #[arg(long, conflicts_with = "model_dir")]
     model_file: Option<PathBuf>,
+    #[arg(long, requires = "model_file")]
+    tokenizer: Option<PathBuf>,
     #[arg(long)]
     gguf_resource: Option<PathBuf>,
     #[arg(long, requires = "tls_key")]
@@ -92,11 +94,11 @@ async fn status(State(s): State<App>, h: HeaderMap) -> ApiResult<Json<HostStatus
     Ok(Json(HostStatus {
         protocol: 1,
         version: env!("CARGO_PKG_VERSION").into(),
-        model: s.runtime.identity.clone(),
+        model: s.runtime.identity().clone(),
         active_request: f.active.clone(),
-        context_limit: s.runtime.cfg.max_position_embeddings,
+        context_limit: s.runtime.context_limit(),
         max_tokens: 128,
-        total_layers: 16,
+        total_layers: s.runtime.layers(),
         connectors: f
             .connectors
             .iter()
@@ -251,10 +253,7 @@ async fn result(
         .as_ref()
         .ok_or_else(|| err("missing tensor"))?;
     output
-        .validate(
-            s.runtime.cfg.hidden_size,
-            s.runtime.cfg.max_position_embeddings,
-        )
+        .validate(s.runtime.hidden_size(), s.runtime.context_limit())
         .map_err(err)?;
     if output.shape != job.input.shape {
         return Err(err("output shape mismatch"));
@@ -323,7 +322,7 @@ async fn generate(
     let (tx, rx) = mpsc::channel::<GenerationEvent>(16);
     tokio::task::spawn_blocking(move || {
         let _permit = permit;
-        if let Err(e) = s.runtime.generate(request, s.fleet, tx) {
+        if let Err(e) = s.runtime.generate(request, s.fleet, tx, s.shard_service) {
             eprintln!("generation ended: {e}");
         }
     });
@@ -350,21 +349,22 @@ async fn main() -> Result<()> {
         args.listen.ip().is_loopback() || args.tls_cert.is_some(),
         "LAN listening requires --tls-cert and --tls-key with a certificate trusted by connector devices"
     );
-    if let Some(path) = &args.model_file {
-        let inspection = stitch_model::gguf::inspect(&mut std::fs::File::open(path)?)?;
-        anyhow::bail!(
-            "GGUF inspected safely: architecture={:?}, tensor types={:?}. {}",
-            inspection.architecture,
-            inspection.quant_types,
-            inspection.reason
-        );
-    }
-    let runtime = Arc::new(Runtime::load(
-        args.model_dir
-            .as_ref()
-            .ok_or_else(|| anyhow::anyhow!("model directory required"))?,
-        args.context,
-    )?);
+    let runtime = Arc::new(if let Some(path) = &args.model_file {
+        Runtime::load_bonsai(
+            path,
+            args.tokenizer.as_ref().ok_or_else(|| {
+                anyhow::anyhow!("Bonsai requires --tokenizer with the pinned tokenizer.json")
+            })?,
+            args.context,
+        )?
+    } else {
+        Runtime::load(
+            args.model_dir
+                .as_ref()
+                .ok_or_else(|| anyhow::anyhow!("model directory required"))?,
+            args.context,
+        )?
+    });
     let admin = secret();
     let pair = secret();
     let mut matrices = HashMap::new();
@@ -464,12 +464,26 @@ async fn shard_weights(
 ) -> ApiResult<Response> {
     connector(&s, &h, &id)?;
     let command = String::from_utf8(hex::decode(encoded).map_err(err)?).map_err(err)?;
-    let bytes = s
-        .shard_service
-        .lock()
-        .unwrap()
-        .weights(&id, &command)
-        .map_err(err)?;
+    let service = s.shard_service.lock().unwrap();
+    if service.active_request.is_none()
+        || service
+            .pending
+            .get(&id)
+            .is_none_or(|pending| pending != &command)
+        || service.buffer.records.get(&command).is_none_or(|record| {
+            !matches!(
+                record.status,
+                stitch_core::shards::Status::Dispatched | stitch_core::shards::Status::Running
+            ) || stitch_host::shards::now_ms() > record.command.lease_expires_ms
+        })
+    {
+        return Err((
+            StatusCode::CONFLICT,
+            "shard weight request is no longer active".into(),
+        ));
+    }
+    let bytes = service.weights(&id, &command).map_err(err)?;
+    drop(service);
     Ok((
         [
             ("content-type", "application/octet-stream"),
@@ -496,6 +510,8 @@ async fn shard_result(
         .get(&result.command_id)
         .is_none_or(|r| {
             r.command.assignment_generation != result.assignment_generation
+                || (r.status != stitch_core::shards::Status::Completed
+                    && stitch_host::shards::now_ms() > r.command.lease_expires_ms)
                 || !matches!(
                     r.status,
                     stitch_core::shards::Status::Dispatched

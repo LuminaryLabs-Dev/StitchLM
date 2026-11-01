@@ -260,9 +260,41 @@ fn fetch_bonsai(dir: &Path) -> Result<()> {
         actual == size && hash == digest,
         "existing Bonsai file failed integrity"
     );
-    println!(
-        "Verified {}. This does not establish full-model runtime support.",
-        path.display()
+    let t = &m["tokenizer"];
+    let tokenizer_path = dir.join("tokenizer.json");
+    let tokenizer_digest = t["sha256"].as_str().context("tokenizer digest")?;
+    let tokenizer_size = t["bytes"].as_u64().context("tokenizer size")?;
+    if !tokenizer_path.exists() {
+        let url = format!(
+            "https://huggingface.co/{}/resolve/{}/tokenizer.json",
+            t["repo"].as_str().context("tokenizer repo")?,
+            t["revision"].as_str().context("tokenizer revision")?
+        );
+        let mut response = reqwest::blocking::Client::builder()
+            .timeout(std::time::Duration::from_secs(180))
+            .build()?
+            .get(url)
+            .send()?
+            .error_for_status()?;
+        let mut bytes = Vec::new();
+        response
+            .by_ref()
+            .take(tokenizer_size + 1)
+            .read_to_end(&mut bytes)?;
+        ensure!(
+            bytes.len() as u64 == tokenizer_size
+                && hex::encode(Sha256::digest(&bytes)) == tokenizer_digest,
+            "tokenizer integrity failed"
+        );
+        let partial = dir.join("tokenizer.json.part");
+        std::fs::write(&partial, bytes)?;
+        std::fs::rename(partial, &tokenizer_path)?;
+    }
+    let (actual, hash) = file_digest(&tokenizer_path)?;
+    ensure!(
+        actual == tokenizer_size && hash == tokenizer_digest,
+        "existing tokenizer failed integrity"
     );
+    println!("Verified model {} and pinned tokenizer. See scoped runtime validation before making support claims.", path.display());
     Ok(())
 }

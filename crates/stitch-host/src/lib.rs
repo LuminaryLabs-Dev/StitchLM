@@ -34,14 +34,14 @@ pub struct Fleet {
     pub active: Option<String>,
     pub cancel: bool,
 }
-pub struct Runtime {
+pub struct LfmRuntime {
     pub cfg: lfm2::Config,
     pub identity: ModelIdentity,
     pub weights: Arc<Vec<u8>>,
     pub model: lfm2::Model,
     pub tokenizer: tokenizers::Tokenizer,
 }
-impl Runtime {
+impl LfmRuntime {
     pub fn load(dir: &Path, context: usize) -> Result<Self> {
         for (name, size) in [
             ("model.safetensors", 708984464u64),
@@ -157,10 +157,14 @@ impl Runtime {
         let mut generated = Vec::new();
         let mut remote_blocks = 0usize;
         let outcome = (|| -> Result<()> {
-            let text = format!(
-                "<|startoftext|><|im_start|>user\n{}<|im_end|>\n<|im_start|>assistant\n",
-                request.prompt
-            );
+            let text = if request.raw_prompt {
+                request.prompt.clone()
+            } else {
+                format!(
+                    "<|startoftext|><|im_start|>user\n{}<|im_end|>\n<|im_start|>assistant\n",
+                    request.prompt
+                )
+            };
             let mut ids = self
                 .tokenizer
                 .encode(text, false)
@@ -274,6 +278,7 @@ impl Runtime {
                         tokens: generated.len(),
                         elapsed_ms: started.elapsed().as_secs_f64() * 1000.,
                         remote_blocks,
+                        remote_shards: 0,
                     })
                     .map_err(|_| anyhow::anyhow!("client disconnected"))?;
                 if Some(token) == self.cfg.eos_token_id {
@@ -313,9 +318,74 @@ impl Runtime {
             tokens: generated.len(),
             elapsed_ms: started.elapsed().as_secs_f64() * 1000.,
             remote_blocks,
+            remote_shards: 0,
         });
         outcome
     }
 }
 
 pub mod shards;
+
+pub mod bonsai;
+pub enum Runtime {
+    Lfm(LfmRuntime),
+    Bonsai(bonsai::BonsaiRuntime),
+}
+impl Runtime {
+    pub fn load(dir: &Path, context: usize) -> Result<Self> {
+        Ok(Self::Lfm(LfmRuntime::load(dir, context)?))
+    }
+    pub fn load_bonsai(file: &Path, tokenizer: &Path, context: usize) -> Result<Self> {
+        Ok(Self::Bonsai(bonsai::BonsaiRuntime::load(
+            file, tokenizer, context,
+        )?))
+    }
+    pub fn identity(&self) -> &ModelIdentity {
+        match self {
+            Self::Lfm(r) => &r.identity,
+            Self::Bonsai(r) => &r.identity,
+        }
+    }
+    pub fn context_limit(&self) -> usize {
+        match self {
+            Self::Lfm(r) => r.cfg.max_position_embeddings,
+            Self::Bonsai(r) => r.context,
+        }
+    }
+    pub fn hidden_size(&self) -> usize {
+        match self {
+            Self::Lfm(r) => r.cfg.hidden_size,
+            Self::Bonsai(_) => 5120,
+        }
+    }
+    pub fn layers(&self) -> usize {
+        match self {
+            Self::Lfm(r) => r.cfg.num_hidden_layers,
+            Self::Bonsai(_) => 64,
+        }
+    }
+    pub fn assignment(
+        &self,
+        r: &Registration,
+        id: String,
+        lease: String,
+        range: BlockRange,
+    ) -> Result<(Assignment, Vec<u8>)> {
+        match self {
+            Self::Lfm(rt) => rt.assignment(r, id, lease, range),
+            Self::Bonsai(rt) => rt.assignment(r, id, lease),
+        }
+    }
+    pub fn generate(
+        &self,
+        request: GenerateRequest,
+        fleet: Arc<Mutex<Fleet>>,
+        events: mpsc::Sender<GenerationEvent>,
+        shards: Arc<Mutex<shards::ShardService>>,
+    ) -> Result<()> {
+        match self {
+            Self::Lfm(r) => r.generate(request, fleet, events),
+            Self::Bonsai(r) => r.generate(request, fleet, events, shards),
+        }
+    }
+}

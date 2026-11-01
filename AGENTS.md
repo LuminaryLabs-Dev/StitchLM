@@ -50,3 +50,13 @@ support. Preserve explicit unsupported-model errors and the legacy Prism type42
 layout distinction. Physical-device acceptance and throughput claims require
 actual measurements. Latest constrained test: at most four connectors, 1 GB each,
 low CPU. Never silently revert to the superseded20-connector/10-MB test.
+
+
+## Full-model validation boundary
+
+The exact pinned Bonsai text backend is separate from both generic GGUF inspection
+and diagnostic matrix tests. Read docs/bonsai-runtime.md and the current full-model
+receipt. Preserve tokenization, state reset, reference tolerances, raw/chat prompt
+modes and separate remote_shards telemetry. Do not turn the native low-memory
+measurements into a total-browser-memory or speed guarantee. The C++ harness under
+tests is an independent external reference, never a production backend.

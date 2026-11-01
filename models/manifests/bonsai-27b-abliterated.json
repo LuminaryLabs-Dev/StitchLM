@@ -4,5 +4,12 @@
   "file": "Ternary-Bonsai-27B-Abliterated-LowDeg-Q2_0.gguf",
   "bytes": 7165121600,
   "sha256": "527f276ddf047b3494de964985b5529b9fc3ecf739ea64d8fab3a6ef8403e81d",
-  "verified": true
+  "verified": true,
+  "tokenizer": {
+    "repo": "Qwen/Qwen3.5-27B",
+    "revision": "fc05daec18b0a78c049392ed2e771dde82bdf654",
+    "file": "tokenizer.json",
+    "bytes": 12807982,
+    "sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42"
+  }
 }

@@ -217,7 +217,7 @@ pub fn inspect<R: Read + Seek>(file: &mut R) -> Result<Inspection> {
         .get("general.architecture")
         .and_then(Value::as_str)
         .map(str::to_owned);
-    Ok(Inspection{version,file_bytes:size,data_offset,architecture,metadata,tensors,quant_types,block_storage_bytes:blocks,full_model_inference_supported:false,reason:"GGUF inspection does not authorize execution. This build's distributed backend is validated for pinned LFM safetensors; GGUF architecture, quantization and activation transforms require an explicit tested backend.".into()})
+    Ok(Inspection{version,file_bytes:size,data_offset,architecture,metadata,tensors,quant_types,block_storage_bytes:blocks,full_model_inference_supported:false,reason:"Container inspection alone does not verify full-model runtime support. The separately pinned Bonsai backend checks the complete artifact hash and tokenizer; other architectures and encodings require their own tested backend.".into()})
 }
 #[cfg(test)]
 mod tests {

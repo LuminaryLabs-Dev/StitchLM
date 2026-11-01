@@ -133,3 +133,5 @@ pub fn new_cache(cfg: &Config) -> Result<lfm2::Cache> {
 pub mod gguf;
 
 pub mod ternary;
+
+pub mod bonsai;

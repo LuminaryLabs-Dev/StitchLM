@@ -1,0 +1,311 @@
+{
+  "native": {
+    "synthetic": false,
+    "connector_limit": 4,
+    "per_connector_virtual_address_cap_bytes": 1000000000,
+    "cpu_duty_target_percent": 10,
+    "cpu_burst_cap": false,
+    "tests": {
+      "unauthorized_rejected": true,
+      "native_network_parity": {
+        "local": [
+          {
+            "kind": "token",
+            "text": "hello",
+            "token": 52572,
+            "tokens": 1,
+            "elapsed_ms": 1369.555362,
+            "remote_blocks": 0,
+            "remote_shards": 0
+          },
+          {
+            "kind": "token",
+            "text": "hello",
+            "token": 7,
+            "tokens": 2,
+            "elapsed_ms": 1539.176278,
+            "remote_blocks": 0,
+            "remote_shards": 0
+          },
+          {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 1539.221096,
+            "remote_blocks": 0,
+            "remote_shards": 0
+          }
+        ],
+        "distributed": [
+          {
+            "kind": "token",
+            "text": "hello",
+            "token": 52572,
+            "tokens": 1,
+            "elapsed_ms": 971.2427580000001,
+            "remote_blocks": 8,
+            "remote_shards": 0
+          },
+          {
+            "kind": "token",
+            "text": "hello",
+            "token": 7,
+            "tokens": 2,
+            "elapsed_ms": 1368.420408,
+            "remote_blocks": 16,
+            "remote_shards": 0
+          },
+          {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 1368.4591070000001,
+            "remote_blocks": 16,
+            "remote_shards": 0
+          }
+        ],
+        "exact_tokens": true,
+        "independent_worker_processes": 4
+      },
+      "remove_and_reprefill": {
+        "passed": true,
+        "events": [
+          {
+            "kind": "token",
+            "text": "hello",
+            "token": 52572,
+            "tokens": 1,
+            "elapsed_ms": 1005.3326739999999,
+            "remote_blocks": 6,
+            "remote_shards": 0
+          },
+          {
+            "kind": "token",
+            "text": "hello",
+            "token": 7,
+            "tokens": 2,
+            "elapsed_ms": 1336.952265,
+            "remote_blocks": 12,
+            "remote_shards": 0
+          },
+          {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 1336.9982730000002,
+            "remote_blocks": 12,
+            "remote_shards": 0
+          }
+        ]
+      },
+      "repeated_requests": 3,
+      "cancelled_request": {
+        "kind": "error",
+        "text": "generation cancelled",
+        "token": null,
+        "tokens": 0,
+        "elapsed_ms": 335.928312,
+        "remote_blocks": 0,
+        "remote_shards": 0
+      },
+      "post_cancel_remote_blocks": 12,
+      "post_cancel_reprefill": true
+    },
+    "status": "passed",
+    "process_metrics": [
+      {
+        "max_rss_bytes": 2653118464,
+        "max_virtual_bytes": 4360351744,
+        "cpu_seconds": 14.19,
+        "sampled_seconds": 26.443253957993875,
+        "average_single_core_cpu_percent": 53.662079646254426,
+        "role": "host"
+      },
+      {
+        "max_rss_bytes": 229830656,
+        "max_virtual_bytes": 239505408,
+        "cpu_seconds": 0.41,
+        "sampled_seconds": 13.585936898001819,
+        "average_single_core_cpu_percent": 3.017826470696339,
+        "role": "connector"
+      },
+      {
+        "max_rss_bytes": 202391552,
+        "max_virtual_bytes": 226918400,
+        "cpu_seconds": 0.93,
+        "sampled_seconds": 23.445487654003955,
+        "average_single_core_cpu_percent": 3.9666481402496108,
+        "role": "connector"
+      },
+      {
+        "max_rss_bytes": 225779712,
+        "max_virtual_bytes": 233283584,
+        "cpu_seconds": 0.75,
+        "sampled_seconds": 23.41983501499635,
+        "average_single_core_cpu_percent": 3.202413678489856,
+        "role": "connector"
+      },
+      {
+        "max_rss_bytes": 202567680,
+        "max_virtual_bytes": 230150144,
+        "cpu_seconds": 0.71,
+        "sampled_seconds": 23.419837386994914,
+        "average_single_core_cpu_percent": 3.031617975256585,
+        "role": "connector"
+      }
+    ]
+  },
+  "browser": {
+    "synthetic": false,
+    "browser": "chrome-headless-shell",
+    "errors": [],
+    "generation_status": "done | 2 tokens | 2.05s | 4 remote block executions",
+    "output": "hello",
+    "connector_status": "Completed block job at token position 15",
+    "browser_cancel_and_remote_resume": true,
+    "stop_worker": true,
+    "passed": true
+  },
+  "shards-native": {
+    "synthetic_weights": false,
+    "full_bonsai_generation": false,
+    "native_connectors": 4,
+    "browser_connectors": 0,
+    "native_address_cap_bytes": 1000000000,
+    "browser_process_cap_enforced": false,
+    "tests": {
+      "rows": {
+        "commands": 17,
+        "devices": 4,
+        "maximum_reference_error": 0.0,
+        "elapsed_ms": 701.475036,
+        "max_estimated_working_bytes": 2940928,
+        "checkpoint_checksum": "3073b384aa41e21955646afa65ddde91afa5e2a0e9e963921fd41e940555155c",
+        "checkpoint_restored": true
+      },
+      "columns": {
+        "commands": 5,
+        "devices": 4,
+        "maximum_reference_error": 0.0,
+        "elapsed_ms": 746.8120240000001,
+        "max_estimated_working_bytes": 9674752,
+        "checkpoint_checksum": "a50d4d944a0d71b80af735842243ce37b96b436eb30ac07081af5fc2b2d3ed24",
+        "checkpoint_restored": true
+      }
+    },
+    "passed": true,
+    "process_metrics": [
+      {
+        "max_rss_bytes": 2645364736,
+        "max_virtual_bytes": 3282776064,
+        "cpu_seconds": 15.16,
+        "role": "host",
+        "sampled_seconds": 29.556302186996618,
+        "average_single_core_cpu_percent": 51.291937347526805
+      },
+      {
+        "max_rss_bytes": 216539136,
+        "max_virtual_bytes": 226918400,
+        "cpu_seconds": 0.51,
+        "role": "native-connector",
+        "sampled_seconds": 15.438135052005237,
+        "average_single_core_cpu_percent": 3.303507828387321
+      },
+      {
+        "max_rss_bytes": 200155136,
+        "max_virtual_bytes": 224911360,
+        "cpu_seconds": 0.49,
+        "role": "native-connector",
+        "sampled_seconds": 15.438098469006945,
+        "average_single_core_cpu_percent": 3.1739660229769164
+      },
+      {
+        "max_rss_bytes": 220655616,
+        "max_virtual_bytes": 233209856,
+        "cpu_seconds": 0.47,
+        "role": "native-connector",
+        "sampled_seconds": 15.438076821999857,
+        "average_single_core_cpu_percent": 3.044420658214576
+      },
+      {
+        "max_rss_bytes": 180883456,
+        "max_virtual_bytes": 189251584,
+        "cpu_seconds": 0.41,
+        "role": "native-connector",
+        "sampled_seconds": 15.384939901996404,
+        "average_single_core_cpu_percent": 2.664943786662416
+      }
+    ]
+  },
+  "shards-hybrid": {
+    "synthetic_weights": false,
+    "full_bonsai_generation": false,
+    "native_connectors": 2,
+    "browser_connectors": 2,
+    "native_address_cap_bytes": 1000000000,
+    "browser_process_cap_enforced": false,
+    "tests": {
+      "rows": {
+        "commands": 17,
+        "devices": 4,
+        "maximum_reference_error": 0.0,
+        "elapsed_ms": 1097.836824,
+        "max_estimated_working_bytes": 2940928,
+        "checkpoint_checksum": "27abdbd328a9d7b44906a6e7c23d02031970cba65995bb77cb06ee466c343727",
+        "checkpoint_restored": true
+      },
+      "columns": {
+        "commands": 5,
+        "devices": 4,
+        "maximum_reference_error": 0.0,
+        "elapsed_ms": 804.763284,
+        "max_estimated_working_bytes": 9674752,
+        "checkpoint_checksum": "97ebcdfc8fa9b5bbe6f81314bc4b1c1ceff7c7ac6eabec7c58bd49a58461a297",
+        "checkpoint_restored": true
+      },
+      "host_console": {
+        "synthetic_matrix": true,
+        "commands": 4,
+        "checkpoint_restored": true
+      }
+    },
+    "passed": true,
+    "process_metrics": [
+      {
+        "max_rss_bytes": 2582204416,
+        "max_virtual_bytes": 3280678912,
+        "cpu_seconds": 11.86,
+        "role": "host",
+        "sampled_seconds": 22.017723601995385,
+        "average_single_core_cpu_percent": 53.86569572035672
+      },
+      {
+        "max_rss_bytes": 226873344,
+        "max_virtual_bytes": 233209856,
+        "cpu_seconds": 0.54,
+        "role": "native-connector",
+        "sampled_seconds": 10.968347198999254,
+        "average_single_core_cpu_percent": 4.923257717892714
+      },
+      {
+        "max_rss_bytes": 215175168,
+        "max_virtual_bytes": 226918400,
+        "cpu_seconds": 0.45,
+        "role": "native-connector",
+        "sampled_seconds": 10.968366436005454,
+        "average_single_core_cpu_percent": 4.102707569313162
+      }
+    ]
+  },
+  "native_wasm": {
+    "synthetic": false,
+    "runtime": "Node-hosted actual Rust WASM, not browser UI",
+    "steps": 4,
+    "maximum_activation_error": 3.1000000000336314e-07,
+    "tolerance": 0.002,
+    "duplicate_idempotency": true
+  }
+}

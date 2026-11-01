@@ -10,3 +10,6 @@
 *.safetensors
 *.gguf
 *.private.log
+
+__pycache__/
+*.pyc

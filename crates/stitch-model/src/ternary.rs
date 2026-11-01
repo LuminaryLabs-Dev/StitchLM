@@ -55,6 +55,23 @@ pub fn matvec_rows(packed: &[u8], input: &[f32]) -> Result<Vec<f32>> {
     }
     Ok(output)
 }
+/// Decode bounded legacy group-128 rows, used for individual token embeddings.
+pub fn decode(packed: &[u8]) -> Result<Vec<f32>> {
+    ensure!(
+        !packed.is_empty() && packed.len().is_multiple_of(BLOCK_BYTES),
+        "invalid packed row"
+    );
+    let mut out = Vec::with_capacity(packed.len() / BLOCK_BYTES * GROUP);
+    for block in packed.as_chunks::<BLOCK_BYTES>().0 {
+        let d = scale(u16::from_le_bytes([block[0], block[1]]));
+        ensure!(d.is_finite(), "non-finite scale");
+        for j in 0..GROUP {
+            out.push((((block[2 + j / 4] >> ((j % 4) * 2)) & 3) as i32 - 1) as f32 * d);
+        }
+    }
+    Ok(out)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

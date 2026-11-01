@@ -36,16 +36,24 @@ matched the unsplit projection. This supports the feasibility of bounded weight
 streaming and row partitioning. Input/output buffers, metadata and process runtime
 consume additional memory;1360bytes is not total process RAM.
 
-## Still unsupported
+## Full text execution and unsupported formats
 
-Complete Bonsai text generation is not implemented by this release. It requires a
-validated Qwen3.5 hybrid attention/GatedDeltaNet execution path, tokenizer/template
-verification, cache lifecycle, full-output reference parity and integration with
-the connector scheduler. The projection test does not establish those claims.
-The existing host therefore refuses this GGUF as a full inference backend.
+The exact pinned artifact has a [Rust text runtime](bonsai-runtime.md) covering
+all 64 layers, full attention, GatedDeltaNet, tokenization and host-owned state.
+Its matrix operations can execute on native and WASM connectors. Read the current
+full-model evidence separately from the historical projection-only tests.
+
+Other GGUF models, Bonsai 2, vision, arbitrary transforms and long-context quality
+are not covered. The inspector's historical `full_model_inference_supported`
+field stays false because header inspection alone does not verify runtime
+admission. It is not the runtime's backend selection result. Runtime startup
+verifies the complete pinned artifact and tokenizer hashes independently.
 
     cargo xtask fetch-bonsai --directory .stitchlm/models/bonsai
     cargo xtask inspect-gguf /path/to/Ternary-Bonsai-27B-Abliterated-LowDeg-Q2_0.gguf
 
-Model source:https://huggingface.co/Hikari07jp/Ternary-Bonsai-27B-Abliterated-LowDeg-GGUF
-Codec reference:https://github.com/PrismML-Eng/llama.cpp/tree/5628c7338963b00a598f2a588fd09a79af6d70db
+Model source: https://huggingface.co/Hikari07jp/Ternary-Bonsai-27B-Abliterated-LowDeg-GGUF
+
+Codec reference: https://github.com/PrismML-Eng/llama.cpp/tree/5628c7338963b00a598f2a588fd09a79af6d70db
+
+Full-model reference: https://github.com/PrismML-Eng/llama.cpp/tree/b06f74a9ea9fa5eaf751f7d575bf766486b4ae62

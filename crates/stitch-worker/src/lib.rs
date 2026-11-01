@@ -3,7 +3,55 @@ use anyhow::{ensure, Result};
 use stitch_core::{Assignment, InferenceJob, JobResult, PROTOCOL};
 use stitch_model::{lfm2, sha256};
 
-pub struct WorkerCore {
+/// Stateful LFM blocks or stateless Bonsai matrix commands, both using the same
+/// validated shard kernel. Stateless assignments never claim to own model state.
+pub enum WorkerCore {
+    Lfm(Box<LfmWorkerCore>),
+    Stateless(Box<Assignment>),
+}
+impl WorkerCore {
+    pub fn new(assignment: Assignment, weights: &[u8]) -> Result<Self> {
+        if assignment.config.get("backend").and_then(|v| v.as_str()) == Some("bonsai-matrix-shards")
+        {
+            assignment.model.validate()?;
+            ensure!(
+                assignment.protocol == PROTOCOL
+                    && assignment.model.weights_sha256 == stitch_model::bonsai::WEIGHTS_SHA256
+                    && weights.is_empty()
+                    && assignment.weights_bytes == 0
+                    && assignment.weights_sha256 == sha256(&[])
+                    && assignment.range.is_empty()
+                    && (256..=8192).contains(&assignment.memory_budget_mb)
+                    && (1..=512).contains(&assignment.context_limit),
+                "invalid stateless Bonsai assignment"
+            );
+            return Ok(Self::Stateless(Box::new(assignment)));
+        }
+        Ok(Self::Lfm(Box::new(LfmWorkerCore::new(
+            assignment, weights,
+        )?)))
+    }
+    pub fn assignment(&self) -> &Assignment {
+        match self {
+            Self::Lfm(w) => w.assignment(),
+            Self::Stateless(a) => a,
+        }
+    }
+    pub fn reset(&mut self) {
+        if let Self::Lfm(w) = self {
+            w.reset();
+        }
+    }
+    pub fn execute(&mut self, job: &InferenceJob) -> Result<JobResult> {
+        match self {
+            Self::Lfm(w) => w.execute(job),
+            Self::Stateless(_) => anyhow::bail!(
+                "stateless Bonsai connector accepts matrix commands, not stateful LFM jobs"
+            ),
+        }
+    }
+}
+pub struct LfmWorkerCore {
     assignment: Assignment,
     cfg: lfm2::Config,
     shard: lfm2::BlockShard,
@@ -12,7 +60,7 @@ pub struct WorkerCore {
     next_position: usize,
     last: Option<(String, String, JobResult)>,
 }
-impl WorkerCore {
+impl LfmWorkerCore {
     pub fn new(assignment: Assignment, weights: &[u8]) -> Result<Self> {
         ensure!(
             assignment.protocol == PROTOCOL,
@@ -263,6 +311,33 @@ pub fn execute_shard(
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn stateless_bonsai_assignment_has_no_weight_or_cache_payload() {
+        let assignment = Assignment {
+            protocol: PROTOCOL,
+            connector_id: "test".into(),
+            lease_token: "test".into(),
+            model: stitch_core::ModelIdentity {
+                id: "bonsai".into(),
+                revision: "a".repeat(40),
+                weights_sha256: stitch_model::bonsai::WEIGHTS_SHA256.into(),
+            },
+            config: serde_json::json!({"backend":"bonsai-matrix-shards"}),
+            range: stitch_core::BlockRange { start: 0, end: 0 },
+            weights_path: "/api/connectors/test/weights".into(),
+            weights_sha256: sha256(&[]),
+            weights_bytes: 0,
+            context_limit: 64,
+            memory_budget_mb: 512,
+        };
+        let mut worker = WorkerCore::new(assignment.clone(), &[]).unwrap();
+        worker.reset();
+        assert!(worker.assignment().range.is_empty());
+        assert!(WorkerCore::new(assignment.clone(), &[1]).is_err());
+        let mut invalid = assignment;
+        invalid.context_limit = 513;
+        assert!(WorkerCore::new(invalid, &[]).is_err());
+    }
     #[test]
     fn corrupted_shard_rejected_before_allocation() {
         let a = Assignment {
