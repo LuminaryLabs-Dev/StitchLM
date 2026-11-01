@@ -1,64 +1,71 @@
-# StitchLM
+# StitchLM v0.0.1
 
-**StitchLM** is a planned heterogeneous distributed LLM inference system: phones, laptops, desktops, and servers should be able to advertise their available capacity and contribute appropriate parts of a **single model's inference**. Contributions may include model-weight placement, transformer-layer execution, attention-head groups, MLP partitions, KV-cache hosting with local attention, and partial tensor reductions.
+Rust native host and native/browser connectors that cooperate on one model's
+inference. The first verified backend runs **LiquidAI/LFM2.5-350M**. The host owns
+model selection, embeddings, sampling and coordination; connectors execute real
+contiguous decoder blocks through the same Rust core, compiled to native or WASM.
 
-> **Status (2026-11-01):** architecture documentation plus a repository-local development harness. This repository does not yet contain an inference runtime, inference benchmarks, an integrated vLLM backend, distributed workers, or validated throughput measurements. Harness tests are synthetic, not inference evidence.
+## Current evidence
 
-## Intent
+- Native generation with checksum-pinned real model weights.
+- Four independent native connector processes, each under a 1 GB virtual-address
+  ceiling, matching local output tokens. Observed connector RSS approximately
+  180–232 MB; low CPU duty target with measured averages and startup caveats.
+- Native/WASM block activation parity, maximum observed error 3.1e-7.
+- Real browser host console plus Web Worker connector generating the same answer.
+- Duplicate-job idempotency, cancellation, removal and fresh-prefill recovery.
 
-Build a capability-aware inference fabric: rather than requiring each worker to host an entire model or perform an identical role, partition a model's executable dependency graph and schedule useful operations on compatible workers. The central coordinator must preserve exact mathematical dependencies, numerical compatibility and cache consistency. Devices are not guaranteed work when their network/compute overhead would slow inference.
+See [validation](docs/validation.md) for exact scope, commands and limitations.
+These are sandbox tests, not physical Mac/Windows/mobile/TV or multi-device LAN
+acceptance. No distributed speedup is promised. The host currently retains the
+full small reference model; this is not yet host-memory offload.
 
-## Proposed architecture
+## Bonsai and GGUF status
 
-1. **Control plane / vLLM integration** — use vLLM's request scheduling, batching and KV-management ideas as a foundation; adding arbitrary cross-device tensor-operation scheduling requires new executor, planner and transport code. Integration is not yet implemented.
-2. **Capacity agent** — measure usable RAM/VRAM, available storage, supported arithmetic and kernels, compute throughput, bandwidth, latency, thermal and battery constraints; periodically re-advertise capacity.
-3. **Partition planner** — select complete layer shards, Q/K/V and output projections, attention-head or KV-head groups, prefill and decode partitions, MLP gate/up/down slices, expert partitions (MoE only), and reduction/merge points.
-4. **Worker runtime** — execute assigned operations on CPU/GPU where supported, cache relevant weights locally, maintain assigned KV blocks, and return versioned typed outputs.
-5. **Transport and collectives** — authenticated device discovery, secure model and activation transfer, reduction, gather, synchronization, cancellation, backpressure and failure recovery.
-6. **Placement policy** — optimize realized latency and throughput rather than raw FLOPS; tolerate device churn, never assume a phone's contribution is beneficial, and allow idle or cache-only roles.
-7. **Validation and benchmarking** — deterministic operation tests, single-host numerical comparisons, distributed output equivalence, token correctness, per-device contribution and speedups/regressions.
+The new [shard contract](docs/shard-contract.md) connects immutable definitions,
+execution records and measured device profiles to live native/WASM command buffers.
+Row and column plans, reference comparison, live status and sealed checkpoints are
+available in the host console.
 
-## Transformer inference decomposition
+The requested **Ternary-Bonsai-27B-Abliterated-LowDeg-Q2_0.gguf** has been downloaded
+and checksum verified. Its actual packed projection was split across four native processes and a mixed
+two-native/two-browser group, using multi-round row and column plans with exact
+reference agreement in the recorded tests. Native processes had 1 GB address-space
+limits; browser process memory was not hard-capped. That is an
+operation-level proof, **not complete Bonsai text generation**.
 
-For every layer, the current hidden state feeds normalization, Q/K/V projections, position encoding, attention against the relevant key/value cache, output projection and a residual update; then normalization, feed-forward projections, gating/nonlinearity, down projection and a second residual update. All workers must respect this data dependency order.
+The file uses Qwen3.5 hybrid attention and a legacy Prism group-128 encoding under
+GGUF type 42. Modern upstream type 42 uses a different layout. This build inspects
+GGUF safely and refuses unsupported full-model execution rather than producing
+wrong text. It does **not** support every GGUF. See [compatibility](docs/gguf-compatibility.md).
 
-Attention may distribute query heads and/or context/KV partitions. Context-partitioned attention outputs require a mathematically correct global softmax merge (running maximum, normalization sums and weighted values), **not** averaging worker outputs. MLP neuron slices can execute in parallel and sum their down-projection contributions. Each device should keep weights near its compute kernels; migrating full weights on every generated token is not viable.
+## Run it
 
-## Goals and limits
+Follow [native quickstart](docs/native-quickstart.md), then
+[web connector quickstart](docs/web-connector-quickstart.md).
+For a host machine and other devices, use the complete [LAN quickstart](docs/lan-quickstart.md).
 
-- **Goal:** allow ~50 heterogeneous devices to participate in one model's execution, each in a useful, measurable capacity.
-- **Not a claim:** 50 workers imply neither 50x speed nor 50 simultaneously generated tokens for one conversation. Sequential token dependencies, network transport, collectives and KV ownership constrain throughput.
-- **Measure separately:** single-stream tokens/s, aggregate tokens/s across requests, first-token latency, peak/working memory, model quality/numerical drift, device energy, and network bytes/token.
-- **Initial target:** a reproducible single-host baseline, then a two-worker correct forward pass, followed by adaptive scheduling and broader device support.
-- **Backends:** vLLM is the preferred orchestration starting point; llama.cpp/GGML and Ollama are possible later adapters, not proven interchangeable tensor executors.
+    cargo xtask fetch-model --directory .stitchlm/models/lfm2.5-350m
+    cargo build --locked --release -p stitchlm-host -p stitchlm-connector
+    cargo xtask build-web
+    target/release/stitchlm-host --model-dir .stitchlm/models/lfm2.5-350m
 
-## Proposed first milestones
+Rust 1.99.1 and wasm-bindgen-cli 0.2.130 are pinned. Model downloads stay outside Git.
+The host prints separate host-access and pairing codes; keep launch logs private.
+LAN use requires a certificate trusted by participating devices. Do not bypass
+certificate warnings. Model and third-party licenses remain applicable.
 
-1. Record model architecture, supported hardware and a reference single-device inference run.
-2. Implement capacity probe plus authenticated device registration.
-3. Implement one remote operation with typed tensors and deterministic merge against baseline.
-4. Execute a complete forward pass across two workers with correctly owned KV caches.
-5. Add latency-aware placements, recovery and heterogeneous worker types.
-6. Expand to a multi-device benchmark; only then evaluate scaling toward 50 participants.
+## Repository
 
-Each milestone requires measurable acceptance evidence, not only source-code presence.
+- apps/host, apps/connector: native executable wrappers.
+- apps/host-web, apps/connector-web: Rust/WASM web wrappers.
+- crates/: shared protocol, model, worker, host, platform, Nexus bridge and UI.
+- xtask/: model fetching, build and inspection tooling.
+- docs/: architecture, scope, security, validation and Simon handoff.
+- tests/ and evidence/v0.0.1/: reproducible tests and scoped measured results.
+- .agent/plugins/stitchlm-builder-kit/: repository-local Codex development harness.
 
-## Repository organization (proposed, not yet created)
-
-- `docs/`: architecture, protocols, benchmarking and decisions
-- `coordinator/`: resource manager and scheduling extensions
-- `workers/`: portable native and device-specific executors
-- `protocol/`: tensor and control-message contracts
-- `tests/`: reference correctness and integration coverage
-- `.agent/`: agent context, bounded task tracking and handoff notes
-
-## Governance
-
-Follow the [Luminary Framework](https://docs.google.com/document/d/1lZLgr2A99EBzMwoLl4iEY7NiFVFG6LjU8snI2eP3ZWI/edit), [Upkeep Guide](https://docs.google.com/document/d/1nIacfvsNnmFg0kxZxs-tU1XF7w7d97HcfN3JEBOCGpw/edit), and the [live Upkeep register](https://docs.google.com/spreadsheets/d/11viRvCFI9qTmsuEYfv9lGBI8edaZFRJNE9b7OQDVz-0/edit). Maintenance reference: **MNT-413**. The repository contains technical source and documentation; project/ticket state remains in its authoritative Luminary tracker. Do not infer approval for dependency, code, deployment, or release changes from this document.
-
-
-## Development plugin
-
-[StitchLM Builder Kit](.agent/plugins/stitchlm-builder-kit/README.md) guides one authorized outcome through definition, candidate build, and validation/delivery preparation. It provides explicit skills, resumable CLI state, evidence gates, local discovery and harness tests—not a vLLM backend or working distributed inference system. See its README for install, commands and honest validation limits.
-
-Repository-plugin guidance: [A Guide To ChatGPT Plugins In Repos](https://docs.google.com/document/d/1WYRMuGgxbB4jwV87Cvx01vqJ9oFRtlVIGTlLkLqzwKo/edit).
+Before development, load the builder kit in the actual executor and read
+[AGENTS.md](AGENTS.md). Kit installation, invocation, source checks and real-model
+proof are separate evidence claims. No tags, release assets or deployment are
+created merely by passing tests.

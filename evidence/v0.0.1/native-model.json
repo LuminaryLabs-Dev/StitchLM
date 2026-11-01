@@ -1,0 +1,12 @@
+{
+  "backend": "Candle Rust CPU f32",
+  "model": "LiquidAI/LFM2.5-350M",
+  "resolved_intermediate_size": 4608,
+  "seconds": 1.368990365,
+  "synthetic": false,
+  "text": "hello",
+  "tokens": [
+    52572,
+    7
+  ]
+}

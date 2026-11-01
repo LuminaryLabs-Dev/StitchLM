@@ -1,0 +1,7 @@
+{
+  "cli_ca_option": true,
+  "insecure_lan_http_rejected": true,
+  "missing_ca_file_rejected": true,
+  "trusted_tls_handshake": "not exercised",
+  "malformed_non_PEM_text": "reqwest ignores text with no certificate blocks; it adds no trust roots and leaves standard verification enabled; not an early format-validation guarantee"
+}

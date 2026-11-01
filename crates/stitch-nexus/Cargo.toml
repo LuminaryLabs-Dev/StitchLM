@@ -1,0 +1,8 @@
+[package]
+name = "stitch-nexus"
+version.workspace = true
+edition.workspace = true
+[dependencies]
+anyhow.workspace = true
+serde_json.workspace = true
+stitch-core = { path = "../stitch-core" }

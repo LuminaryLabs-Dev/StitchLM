@@ -1,0 +1,3 @@
+# Reference development profile, not an auto-loaded security override.
+loopback_only = true
+model = "LiquidAI/LFM2.5-350M"

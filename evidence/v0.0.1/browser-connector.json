@@ -1,0 +1,11 @@
+{
+  "synthetic": false,
+  "browser": "chrome-headless-shell",
+  "errors": [],
+  "generation_status": "done | 2 tokens | 1.67s | 4 remote block executions",
+  "output": "hello",
+  "connector_status": "Completed block job at token position 15",
+  "browser_cancel_and_remote_resume": true,
+  "stop_worker": true,
+  "passed": true
+}

@@ -1,0 +1,1 @@
+{"schema":"stitchlm.partition-plan/1","layers":16,"connector_ranges":[[0,2],[2,4],[4,6],[6,8],[8,10],[10,12],[12,14]],"host_tail":[14,16],"host_owns":["embedding","output_head","sampling","unassigned_ranges"],"max_registered_connectors":20,"extra_connectors":"standby replicas, one selected per range per request","ten_megabyte_total_memory_supported":false}

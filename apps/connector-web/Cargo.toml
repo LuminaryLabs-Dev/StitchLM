@@ -1,0 +1,17 @@
+[package]
+name = "stitchlm-connector-web"
+version.workspace = true
+edition.workspace = true
+[lib]
+crate-type = ["cdylib", "rlib"]
+[dependencies]
+wasm-bindgen.workspace = true
+serde_json.workspace = true
+stitch-worker = { path = "../../crates/stitch-worker" }
+stitch-core = { path = "../../crates/stitch-core" }
+stitch-platform = { path = "../../crates/stitch-platform" }
+wasm-bindgen-futures.workspace = true
+js-sys.workspace = true
+web-sys = { workspace = true, features = ["DedicatedWorkerGlobalScope", "Response"] }
+stitch-model = { path = "../../crates/stitch-model" }
+hex.workspace = true

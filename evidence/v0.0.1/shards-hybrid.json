@@ -1,0 +1,60 @@
+{
+  "synthetic_weights": false,
+  "full_bonsai_generation": false,
+  "native_connectors": 2,
+  "browser_connectors": 2,
+  "native_address_cap_bytes": 1000000000,
+  "browser_process_cap_enforced": false,
+  "tests": {
+    "rows": {
+      "commands": 17,
+      "devices": 4,
+      "maximum_reference_error": 0.0,
+      "elapsed_ms": 1009.1115390000001,
+      "max_estimated_working_bytes": 2940928,
+      "checkpoint_checksum": "f80791290b892a4b8c735ac370455e3dfb579bcb27cb957b2f89f13704fefe2b",
+      "checkpoint_restored": true
+    },
+    "columns": {
+      "commands": 5,
+      "devices": 4,
+      "maximum_reference_error": 0.0,
+      "elapsed_ms": 845.797449,
+      "max_estimated_working_bytes": 9674752,
+      "checkpoint_checksum": "d38ce9a3f2943917c4ddbe83306fb32fa1d474d816783a1e5a04af9952f763c5",
+      "checkpoint_restored": true
+    },
+    "host_console": {
+      "synthetic_matrix": true,
+      "commands": 4,
+      "checkpoint_restored": true
+    }
+  },
+  "passed": true,
+  "process_metrics": [
+    {
+      "max_rss_bytes": 2582548480,
+      "max_virtual_bytes": 3280556032,
+      "cpu_seconds": 11.9,
+      "role": "host",
+      "sampled_seconds": 21.82772306699917,
+      "average_single_core_cpu_percent": 54.51782562694931
+    },
+    {
+      "max_rss_bytes": 211943424,
+      "max_virtual_bytes": 220618752,
+      "cpu_seconds": 0.56,
+      "role": "native-connector",
+      "sampled_seconds": 10.86544157199387,
+      "average_single_core_cpu_percent": 5.153955283726558
+    },
+    {
+      "max_rss_bytes": 205713408,
+      "max_virtual_bytes": 226914304,
+      "cpu_seconds": 0.48,
+      "role": "native-connector",
+      "sampled_seconds": 10.865437547996407,
+      "average_single_core_cpu_percent": 4.41767759355915
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+[package]
+name = "stitch-worker"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+stitch-core = { path = "../stitch-core" }
+stitch-model = { path = "../stitch-model" }
+sha2.workspace = true
+hex.workspace = true
+
+[dev-dependencies]
+candle.workspace = true
+tokenizers.workspace = true

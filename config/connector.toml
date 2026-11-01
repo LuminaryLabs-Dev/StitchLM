@@ -1,0 +1,3 @@
+# Reference settings; pairing code comes from STITCH_PAIRING_CODE, never this file.
+host = "http://127.0.0.1:8787"
+memory_budget_mb = 512

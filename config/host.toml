@@ -1,0 +1,5 @@
+# Reference settings. CLI flags are authoritative in v0.0.1.
+listen = "127.0.0.1:8787"
+context = 256
+max_output_tokens = 128
+max_connectors = 20

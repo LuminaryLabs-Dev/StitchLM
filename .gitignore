@@ -1,0 +1,12 @@
+/target/
+/dist/
+/.stitchlm/
+/.agent/runs/
+/node_modules/
+*.part
+*.tmp
+*.pem
+*.key
+*.safetensors
+*.gguf
+*.private.log

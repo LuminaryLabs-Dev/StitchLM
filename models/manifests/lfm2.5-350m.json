@@ -1,0 +1,46 @@
+{
+  "model": "LiquidAI/LFM2.5-350M",
+  "revision": "9e6c6ccf47cd318696e137d381a7ded8fe4df09f",
+  "files": [
+    {
+      "path": "config.json",
+      "bytes": 1281,
+      "sha256": "720b43d6ddc2ed25be23eed355aefcf342434a176dedad23dbe0a5e3ac24bbb8",
+      "publishedSha256": null
+    },
+    {
+      "path": "tokenizer.json",
+      "bytes": 4733389,
+      "sha256": "df1d8d5ec5d091b460562ffd545e4a5e91d17d4a0db7ebe733be34ed374377bd",
+      "publishedSha256": null
+    },
+    {
+      "path": "tokenizer_config.json",
+      "bytes": 595,
+      "sha256": "3701f370c70034d06e28947ff51c1063983393319f429e3ce58f06a45fae67cc",
+      "publishedSha256": null
+    },
+    {
+      "path": "generation_config.json",
+      "bytes": 134,
+      "sha256": "0ec7d228c4de7e3453e98bf6910c7eb7841e87fede63ea11c0f75a5c64e1c3c3",
+      "publishedSha256": null
+    },
+    {
+      "path": "model.safetensors",
+      "bytes": 708984464,
+      "sha256": "1c9c77a4471a7f590f85240f74ed1fc26df7fbde88c3006724e2f93ca993ea4e",
+      "publishedSha256": "1c9c77a4471a7f590f85240f74ed1fc26df7fbde88c3006724e2f93ca993ea4e"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 10574,
+      "sha256": "4d28ca14dedc0b3d0fcc2b3339f0e79931faa33874f3d24f522183a8fc70068c",
+      "publishedSha256": null
+    }
+  ],
+  "license": "LFM Open License v1.0",
+  "license_url": "https://huggingface.co/LiquidAI/LFM2.5-350M/blob/9e6c6ccf47cd318696e137d381a7ded8fe4df09f/LICENSE",
+  "architecture": "lfm2",
+  "source": "https://huggingface.co/LiquidAI/LFM2.5-350M"
+}

@@ -1,0 +1,159 @@
+{
+  "synthetic": false,
+  "connector_limit": 4,
+  "per_connector_virtual_address_cap_bytes": 1000000000,
+  "cpu_duty_target_percent": 10,
+  "cpu_burst_cap": false,
+  "tests": {
+    "unauthorized_rejected": true,
+    "native_network_parity": {
+      "local": [
+        {
+          "request_id": "fd8e1f96899e96a17752c37c847d40f8a38fd1c0cf956352f1a2b87517cc6476",
+          "kind": "token",
+          "text": "hello",
+          "token": 52572,
+          "tokens": 1,
+          "elapsed_ms": 1477.302291,
+          "remote_blocks": 0
+        },
+        {
+          "request_id": "fd8e1f96899e96a17752c37c847d40f8a38fd1c0cf956352f1a2b87517cc6476",
+          "kind": "token",
+          "text": "hello",
+          "token": 7,
+          "tokens": 2,
+          "elapsed_ms": 1740.4877330000002,
+          "remote_blocks": 0
+        },
+        {
+          "request_id": "fd8e1f96899e96a17752c37c847d40f8a38fd1c0cf956352f1a2b87517cc6476",
+          "kind": "done",
+          "text": "hello",
+          "token": null,
+          "tokens": 2,
+          "elapsed_ms": 1740.591091,
+          "remote_blocks": 0
+        }
+      ],
+      "distributed": [
+        {
+          "request_id": "04732d29de14dc631e7363e59d68bcc55011ae327c5308ba632386d08f6a1f80",
+          "kind": "token",
+          "text": "hello",
+          "token": 52572,
+          "tokens": 1,
+          "elapsed_ms": 1358.9824830000002,
+          "remote_blocks": 8
+        },
+        {
+          "request_id": "04732d29de14dc631e7363e59d68bcc55011ae327c5308ba632386d08f6a1f80",
+          "kind": "token",
+          "text": "hello",
+          "token": 7,
+          "tokens": 2,
+          "elapsed_ms": 1927.7899240000002,
+          "remote_blocks": 16
+        },
+        {
+          "request_id": "04732d29de14dc631e7363e59d68bcc55011ae327c5308ba632386d08f6a1f80",
+          "kind": "done",
+          "text": "hello",
+          "token": null,
+          "tokens": 2,
+          "elapsed_ms": 1927.8356649999998,
+          "remote_blocks": 16
+        }
+      ],
+      "exact_tokens": true,
+      "independent_worker_processes": 4
+    },
+    "remove_and_reprefill": {
+      "passed": true,
+      "events": [
+        {
+          "request_id": "130b28f8ee3dd073216cf5a9f97e2ec7f3c23f0ac16322aeb9ac4428247b541b",
+          "kind": "token",
+          "text": "hello",
+          "token": 52572,
+          "tokens": 1,
+          "elapsed_ms": 994.250948,
+          "remote_blocks": 6
+        },
+        {
+          "request_id": "130b28f8ee3dd073216cf5a9f97e2ec7f3c23f0ac16322aeb9ac4428247b541b",
+          "kind": "token",
+          "text": "hello",
+          "token": 7,
+          "tokens": 2,
+          "elapsed_ms": 1346.779371,
+          "remote_blocks": 12
+        },
+        {
+          "request_id": "130b28f8ee3dd073216cf5a9f97e2ec7f3c23f0ac16322aeb9ac4428247b541b",
+          "kind": "done",
+          "text": "hello",
+          "token": null,
+          "tokens": 2,
+          "elapsed_ms": 1346.980511,
+          "remote_blocks": 12
+        }
+      ]
+    },
+    "repeated_requests": 3,
+    "cancelled_request": {
+      "request_id": "83f622d6cb8e17fbc2e2d4527c605b3a211d9f1d61d2768d4023650e3e14ef64",
+      "kind": "error",
+      "text": "generation cancelled",
+      "token": null,
+      "tokens": 0,
+      "elapsed_ms": 12.306405,
+      "remote_blocks": 0
+    },
+    "post_cancel_remote_blocks": 12,
+    "post_cancel_reprefill": true
+  },
+  "status": "passed",
+  "process_metrics": [
+    {
+      "max_rss_bytes": 2625789952,
+      "max_virtual_bytes": 4360232960,
+      "cpu_seconds": 16.9,
+      "sampled_seconds": 31.328503398995963,
+      "average_single_core_cpu_percent": 53.944485584784175,
+      "role": "host"
+    },
+    {
+      "max_rss_bytes": 214163456,
+      "max_virtual_bytes": 231178240,
+      "cpu_seconds": 0.49,
+      "sampled_seconds": 18.49964729399653,
+      "average_single_core_cpu_percent": 2.6486991465994802,
+      "role": "connector"
+    },
+    {
+      "max_rss_bytes": 216502272,
+      "max_virtual_bytes": 229634048,
+      "cpu_seconds": 0.78,
+      "sampled_seconds": 25.78245701099513,
+      "average_single_core_cpu_percent": 3.025312908181571,
+      "role": "connector"
+    },
+    {
+      "max_rss_bytes": 231038976,
+      "max_virtual_bytes": 239501312,
+      "cpu_seconds": 1.0,
+      "sampled_seconds": 25.782469459998538,
+      "average_single_core_cpu_percent": 3.8786044197647493,
+      "role": "connector"
+    },
+    {
+      "max_rss_bytes": 202481664,
+      "max_virtual_bytes": 226914304,
+      "cpu_seconds": 0.82,
+      "sampled_seconds": 25.75671446200431,
+      "average_single_core_cpu_percent": 3.183635867880759,
+      "role": "connector"
+    }
+  ]
+}

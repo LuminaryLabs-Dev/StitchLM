@@ -1,0 +1,13 @@
+[package]
+name = "stitchlm-connector"
+version.workspace = true
+edition.workspace = true
+[dependencies]
+anyhow.workspace = true
+serde_json.workspace = true
+stitch-core = { path = "../../crates/stitch-core" }
+stitch-worker = { path = "../../crates/stitch-worker" }
+reqwest.workspace = true
+tokio.workspace = true
+clap.workspace = true
+hex.workspace = true

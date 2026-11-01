@@ -1,0 +1,31 @@
+{
+  "duplicate_idempotency": true,
+  "host_range": [
+    4,
+    16
+  ],
+  "maximum_logit_error": 0.0,
+  "missing_prefill_rejected": true,
+  "model": {
+    "id": "LiquidAI/LFM2.5-350M",
+    "revision": "9e6c6ccf47cd318696e137d381a7ded8fe4df09f",
+    "weights_sha256": "1c9c77a4471a7f590f85240f74ed1fc26df7fbde88c3006724e2f93ca993ea4e"
+  },
+  "remote_ranges": [
+    [
+      0,
+      2
+    ],
+    [
+      2,
+      4
+    ]
+  ],
+  "synthetic": false,
+  "text": "1",
+  "tokens": [
+    526,
+    7
+  ],
+  "transport": "in-process shared worker core; network separately tested"
+}

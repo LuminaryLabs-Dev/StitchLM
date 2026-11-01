@@ -1,0 +1,18 @@
+{
+  "full_model_inference": false,
+  "actual_weight_projection": true,
+  "tensor": "blk.0.ffn_gate.weight",
+  "worker_processes": 4,
+  "address_space_limit_bytes": 1000000000,
+  "weight_buffer_per_worker_bytes": 1360,
+  "exact_partition_parity": true,
+  "rows": 17408,
+  "columns": 5120,
+  "whole_seconds": 0.256302967,
+  "part_seconds": [
+    0.052632389,
+    0.090551765,
+    0.052722981,
+    0.062490369
+  ]
+}

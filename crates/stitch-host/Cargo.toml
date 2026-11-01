@@ -1,0 +1,18 @@
+[package]
+name = "stitch-host"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+stitch-core = { path = "../stitch-core" }
+stitch-model = { path = "../stitch-model" }
+candle.workspace = true
+tokenizers.workspace = true
+tokio.workspace = true
+axum.workspace = true
+hex.workspace = true
+rand = "0.9"
+sha2.workspace = true

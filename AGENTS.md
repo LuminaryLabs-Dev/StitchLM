@@ -1,6 +1,6 @@
 # StitchLM Agent Instructions
 
-Scope: `LuminaryLabs-Dev/StitchLM`. Read `README.md` and `.agent/memory.md` before starting. Follow the Luminary Framework, current Upkeep Guide, and the live Upkeep MNT-413 record for authority and concurrency. The repository is currently a documented concept, **not** a working inference engine.
+Scope: `LuminaryLabs-Dev/StitchLM`. Read `README.md` and `.agent/memory.md` before starting. Follow the Luminary Framework, current Upkeep Guide, and the live Upkeep MNT-413 record for authority and concurrency. The repository now contains a scoped Rust/WASM inference implementation; README and current validation evidence define what is actually proven.
 
 ## Operating contract
 
@@ -32,3 +32,21 @@ Permitted: README, AGENTS.md, .agent/memory.md. Excluded: runtime code, CI, bina
 ## Authorized development-plugin phase (2026-11-01)
 
 The user separately authorized a development kit analogous to Arcade/Glass and delivery to main. `.agent/plugins/stitchlm-builder-kit/` is that harness; `.agents/plugins/marketplace.json` is discovery and `tests/stitchlm-builder.test.mjs` tests synthetic orchestration. Read the plugin README and engineering contract for kit work. The historical initial-pass exclusions are not a ban on this specifically authorized harness phase. Inference runtime, vLLM backend, peers, model downloads, deployment and releases remain unimplemented and require separate authorization. Future outcomes must still satisfy the operating contract; passing harness tests grants no new authority.
+
+## Current authorized Rust implementation phase
+
+The user separately authorized the complete Rust/WASM v0.0.1 implementation,
+actual crates and model tests in this sandbox, no delegated AI workers, and a
+GitHub-connector push to main. This supersedes historical documentation-only and
+plugin-only exclusions for this outcome. Read docs/v0.0.1-scope.md and current
+validation evidence before making capability claims. The historical statements
+above describe their phases, not the current repository state.
+
+Keep the four flat apps and shared crates. Generated WASM bootstrap JavaScript
+and test scripts are tooling, not replacement inference backends. Native and
+browser connectors must execute the same model core. Do not claim GGUF container
+parsing, matrix projection tests, or a compiled WASM file establish complete model
+support. Preserve explicit unsupported-model errors and the legacy Prism type42
+layout distinction. Physical-device acceptance and throughput claims require
+actual measurements. Latest constrained test: at most four connectors, 1 GB each,
+low CPU. Never silently revert to the superseded20-connector/10-MB test.

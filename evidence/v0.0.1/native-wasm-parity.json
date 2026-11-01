@@ -1,0 +1,8 @@
+{
+  "synthetic": false,
+  "runtime": "Node-hosted actual Rust WASM, not browser UI",
+  "steps": 4,
+  "maximum_activation_error": 3.1000000000336314e-07,
+  "tolerance": 0.002,
+  "duplicate_idempotency": true
+}

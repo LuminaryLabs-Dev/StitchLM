@@ -1,0 +1,23 @@
+[package]
+name = "stitch-model"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+candle.workspace = true
+candle-nn.workspace = true
+candle-transformers.workspace = true
+safetensors.workspace = true
+tracing.workspace = true
+sha2.workspace = true
+hex.workspace = true
+stitch-core = { path = "../stitch-core" }
+
+[target.'cfg(not(target_arch = "wasm32"))'.dev-dependencies]
+tokenizers.workspace = true
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+getrandom = { version = "0.3", features = ["wasm_js"] }

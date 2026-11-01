@@ -1,0 +1,71 @@
+{
+  "synthetic_weights": false,
+  "full_bonsai_generation": false,
+  "native_connectors": 4,
+  "browser_connectors": 0,
+  "native_address_cap_bytes": 1000000000,
+  "browser_process_cap_enforced": false,
+  "tests": {
+    "rows": {
+      "commands": 17,
+      "devices": 4,
+      "maximum_reference_error": 0.0,
+      "elapsed_ms": 3642.24366,
+      "max_estimated_working_bytes": 2940928,
+      "checkpoint_checksum": "210c253b67677689c4a2a059aeb234e98ceebcc42af3bbff383c1b0def185ae1",
+      "checkpoint_restored": true
+    },
+    "columns": {
+      "commands": 5,
+      "devices": 4,
+      "maximum_reference_error": 0.0,
+      "elapsed_ms": 1067.39698,
+      "max_estimated_working_bytes": 9674752,
+      "checkpoint_checksum": "509d905332f4a74a9932493020de7d5bd8d578b2ef619afb6c979a8b0388ad71",
+      "checkpoint_restored": true
+    }
+  },
+  "passed": true,
+  "process_metrics": [
+    {
+      "max_rss_bytes": 2645553152,
+      "max_virtual_bytes": 3284754432,
+      "cpu_seconds": 12.4,
+      "role": "host",
+      "sampled_seconds": 26.24808963000396,
+      "average_single_core_cpu_percent": 47.24153328791467
+    },
+    {
+      "max_rss_bytes": 197427200,
+      "max_virtual_bytes": 220692480,
+      "cpu_seconds": 0.68,
+      "role": "native-connector",
+      "sampled_seconds": 15.256945540000743,
+      "average_single_core_cpu_percent": 4.456986480138979
+    },
+    {
+      "max_rss_bytes": 175988736,
+      "max_virtual_bytes": 189157376,
+      "cpu_seconds": 0.55,
+      "role": "native-connector",
+      "sampled_seconds": 15.206278426005156,
+      "average_single_core_cpu_percent": 3.616927065200993
+    },
+    {
+      "max_rss_bytes": 175276032,
+      "max_virtual_bytes": 189157376,
+      "cpu_seconds": 0.47,
+      "role": "native-connector",
+      "sampled_seconds": 15.206263822998153,
+      "average_single_core_cpu_percent": 3.090831551200406
+    },
+    {
+      "max_rss_bytes": 178036736,
+      "max_virtual_bytes": 187060224,
+      "cpu_seconds": 0.55,
+      "role": "native-connector",
+      "sampled_seconds": 15.206250960000034,
+      "average_single_core_cpu_percent": 3.616933598207554
+    }
+  ]
+}
