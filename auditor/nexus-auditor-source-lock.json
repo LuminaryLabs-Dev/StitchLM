@@ -1,0 +1,71 @@
+{
+  "commit": "1e8258d1ad0ab7cb841c08cfc07886d2b79ca3c3",
+  "files": [
+    { "path": ".gitignore", "sha": "1ac25562a9f504147fff946aca3b9d629f8fbb08" },
+    { "path": "README.md", "sha": "0648ce36e6b56cb54c1d0ecbc7034cb65ccd8c41" },
+    {
+      "path": "pyproject.toml",
+      "sha": "38650366cdde197f4d997b2295f79c53cf13b370"
+    },
+    {
+      "path": "src/nexus_auditor/__init__.py",
+      "sha": "d15fb7d9fe2d8f95827ba28826ba18ee69dd2fa7"
+    },
+    {
+      "path": "src/nexus_auditor/__main__.py",
+      "sha": "5fe53a55c8c52f7ad055e520d6aedec61b20d484"
+    },
+    {
+      "path": "src/nexus_auditor/cli.py",
+      "sha": "a6729260efc035d3e0f7614441029ec180bbac6d"
+    },
+    {
+      "path": "src/nexus_auditor/validation.py",
+      "sha": "19b6c7b5b0c6ea08477c92f100ffbfe9e02d8786"
+    },
+    {
+      "path": "src/nexus_code_auditor/__init__.py",
+      "sha": "f38884b6476719df6f061b8f5fe337a2e0b32cd9"
+    },
+    {
+      "path": "src/nexus_code_auditor/__main__.py",
+      "sha": "1daf8814b0a9cda4a24d862eca4d8021b9e74823"
+    },
+    {
+      "path": "src/nexus_code_auditor/cli.py",
+      "sha": "ffe8cd883625ca1f9e4e0e8453e0e812f950b66b"
+    },
+    {
+      "path": "src/nexus_code_auditor/findings.py",
+      "sha": "a67cbe54e01d4a11979be88664a8e99cbcb03d34"
+    },
+    {
+      "path": "src/nexus_code_auditor/reporter.py",
+      "sha": "2dd0daaec812d1b1aed10255e241b5bd8c8ddeb6"
+    },
+    {
+      "path": "src/nexus_code_auditor/safety.py",
+      "sha": "cd0fd8e07a2b3bdc5366ba5dd2bc39d0978f54c5"
+    },
+    {
+      "path": "src/nexus_code_auditor/scanner.py",
+      "sha": "77dcae52b8aff450acb03ef2a37c1c12427f9ef4"
+    },
+    {
+      "path": "src/nexus_code_auditor/structure.py",
+      "sha": "9912f44ae044ace83a1959aa5d9d58b92b546eff"
+    },
+    {
+      "path": "tests/host-checks.jsonl",
+      "sha": "96f2c2911d6756c2ddcf166ed256f9d5641fc6e9"
+    },
+    {
+      "path": "tests/test_validation.py",
+      "sha": "b078628b0e6225401ca43a9a94a5ef62e3a47ab0"
+    },
+    {
+      "path": "tests/validation.host.json",
+      "sha": "462a815ccfed363ae5cc9e8ede8c3b0516edae08"
+    }
+  ]
+}

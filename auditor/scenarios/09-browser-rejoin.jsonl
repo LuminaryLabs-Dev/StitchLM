@@ -1,0 +1,8 @@
+{"id": "ST-AUDIT-009", "name": "browser rejoin", "models": ["lfm"], "timeout_ms": 300000}
+{"do": "host.start"}
+{"do": "join", "actor": "worker", "kind": "browser"}
+{"do": "generate", "id": "before", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}]}
+{"do": "leave", "actor": "worker"}
+{"do": "join", "actor": "worker", "kind": "browser"}
+{"do": "generate", "id": "after", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}]}
+{"do": "assert.tokens", "left": "before", "right": "after"}

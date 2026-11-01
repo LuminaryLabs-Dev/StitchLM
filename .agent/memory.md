@@ -115,3 +115,42 @@ rather than multiplying network wait time. Browser RAM is not hard-capped.
 Physical devices/LAN, long-context quality, vision, Bonsai2, arbitrary GGUFs and
 durable full-model cache migration remain outside the verified scope. No tags,
 releases, deployments or Drive/tracker edits are implied by source delivery.
+
+## Scenario-auditor delivery phase — 2026-11-01
+
+The user explicitly approved the scenario-based plan and a guarded GitHub
+connector push to main after validation. Root implemented directly in the
+sandbox without AI build workers. Source baseline was
+952967dc7700d6b0a6e24340c9b1f9d2c98881ed. No separate LANLint module exists.
+The root auditor package delegates its generated command wrappers to pinned
+NexusAuditor 1e8258d1ad0ab7cb841c08cfc07886d2b79ca3c3; a local Node adapter
+executes JSONL-defined timing/faults against unchanged Rust/WASM inference.
+
+Clean-checkout native/web builds and all 16 real-model scenarios passed. The 42
+harness tests passed three consecutive runs;42 Rust tests, formatting, Clippy and
+36 native-loaded builder-kit tests passed. The installed kit was refreshed after
+its validation guidance changed. Installation proof is distinct from claiming a
+new AI session invoked the plugin.
+
+The exact pinned legacy Bonsai test cancelled a real held weight request,
+observed its real 409 response and completed fresh generation on the same browser
+connector (4,147 remote shards). Four-native row splitting completed 4,147 shards;
+two-native/two-browser column splitting completed 2,728 shards. Every requested
+matrix actor participated, and the output token matched the host-only reference.
+The one-browser recovery case took about 679 seconds; these are correctness tests,
+not a speedup or interactive-performance claim. Bonsai2 and arbitrary GGUFs remain
+outside this evidence.
+
+Validation repaired browser shutdown races, streamed-console evidence capture,
+a hidden 300,000 ms Node fetch body timeout and contradictory host-only reference
+requests. The runner now uses the scenario deadline for API inference streaming,
+rejects unsafe artifact paths and rejects host-only requests with a nonzero
+connector count before launch. See auditor/evidence for exact hashes/results.
+
+Native connector address space was capped at 1,000,000,000 bytes. Browser memory
+was sampled, not hard-capped; host memory is separate and CPU pacing cooperative.
+The tests simulate application-request conditions on owned loopback services.
+Physical LAN/OS/mobile/TV behavior, packet-level impairment, long contexts and
+production uptime remain unverified. No model weights, credentials, raw private
+runs, dependencies, tags, releases, deployments or Drive/tracker changes are
+included. Future work should use auditor/README.md and preserve these boundaries.

@@ -1,0 +1,11 @@
+{"id": "ST-AUDIT-016", "name": "repeated generations", "models": ["lfm"], "timeout_ms": 600000}
+{"do": "host.start"}
+{"do": "join", "actor": "worker", "kind": "browser"}
+{"do": "generate", "id": "warm", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}]}
+{"do": "checkpoint.metrics", "save": "baseline"}
+{"do": "generate", "id": "second", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}]}
+{"do": "generate", "id": "third", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}]}
+{"do": "generate", "id": "fourth", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}]}
+{"do": "assert.tokens", "left": "warm", "right": "fourth"}
+{"do": "assert.memory", "from": "baseline", "max_growth_bytes": 134217728}
+{"do": "assert.alive"}

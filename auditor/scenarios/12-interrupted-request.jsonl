@@ -1,0 +1,8 @@
+{"id": "ST-AUDIT-012", "name": "interrupted request", "models": ["lfm"], "timeout_ms": 300000}
+{"do": "host.start"}
+{"do": "join", "actor": "worker", "kind": "browser"}
+{"do": "fault", "actor": "worker", "id": "perturb", "path": "/job", "mode": "abort"}
+{"do": "wait.event", "type": "fault-applied", "id": "perturb"}
+{"do": "leave", "actor": "worker"}
+{"do": "join", "actor": "worker", "kind": "browser"}
+{"do": "generate", "id": "recovered", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}]}

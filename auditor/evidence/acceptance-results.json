@@ -1,0 +1,1122 @@
+{
+  "schema": "stitchlm-auditor-acceptance/1",
+  "status": "PASS",
+  "source_base_commit": "952967dc7700d6b0a6e24340c9b1f9d2c98881ed",
+  "candidate_files_sha256": {
+    ".agent/plugins/stitchlm-builder-kit/README.md": "aee98aa66d9bd8930c84c939c8d2f7def92f4c572c5162e12e45fbb3406a2b49",
+    ".agent/plugins/stitchlm-builder-kit/skills/validate/SKILL.md": "e985bcb25be415e2c3ca8a112f815e686b0c29339d99542ce4a629e2bd6fd989",
+    ".gitignore": "4503028a5da581b13b8c524f219a20e19d7dedf9d0ee1fb5744fd9ab8ed2d741",
+    "AGENTS.md": "9d3bdda27423f26ce337c33c592bec5f7dfa2c093f6d5d67346fa9f7be096cc7",
+    "README.md": "00c564e14171b7cbf1a5b852441d16ab5a245f0c6c29caabe415b95ffd36fcb4",
+    "auditor/README.md": "924ef67d6fdf214bae3d6626be76169be59694d1055b29f04f09ca93c8aae723",
+    "auditor/nexus-auditor-source-lock.json": "65b7e3b377f7bb1b14b4465283a36dbb0afb83e77d99f2402f864c263640d02d",
+    "auditor/package-lock.json": "29d0861068aecbc28bcaf3088d79d590acb8263b1fd0a4d3f0528c90987bbd38",
+    "auditor/package.json": "3c257cd7d577030b9287fe03bbd71ab5cc948a2d649e061a6f5df694e443ac84",
+    "auditor/requirements.lock.txt": "747f4641ae8af32ab1b87385846d7acfe5826133188f6fd4110b9ec9818ba0a5",
+    "auditor/runner/actions.mjs": "128e00de56b89d51714a0a9a0f48a04d72e6be0b42f2f25734e0046478d7008a",
+    "auditor/runner/actors.mjs": "3134558c7882c1b27aa781f51ae225ef3110cf1a65536d3e5822077902b5183b",
+    "auditor/runner/assertions.mjs": "8001d5a9fcad2e53f4fd804f5d0874cf8cac5b848669218e3f19aa1f16d6580c",
+    "auditor/runner/evidence.mjs": "0d4b96eee663e62ae31ee56d67da9db6dfbd5c170ab48be19a79fb16bcce794a",
+    "auditor/runner/lifecycle.mjs": "a3dea2bce4e49d2010d90c37a3667e000dc2de7d4e3272fb9f60fb142ce35560",
+    "auditor/runner/run-scenario.mjs": "d5453373a6e9d0e0034236d30d33e1294bcae82e842dec0f8c75c178059a6ae8",
+    "auditor/scenarios/01-first-generation.jsonl": "c25d2b0835ea9cc2626a88f3f02f802ecee391838e5bf57a70c7a33926e6485f",
+    "auditor/scenarios/02-pairing-retry.jsonl": "9095e01b2821e34dfe3f2e3baeb3d616e636b6e5b6b6012cc8c94ee55d645f18",
+    "auditor/scenarios/03-staggered-joins.jsonl": "a2e4e398ba5d6dc7ddd35b7c7af9a1f6be9c0e69ab751cf368dfd9bd0babffaa",
+    "auditor/scenarios/04-simultaneous-joins.jsonl": "6be9a3acc2281901f8e4862a9cbe9b65c2508bafc388fc84a737f4d13964b6f8",
+    "auditor/scenarios/05-double-generate.jsonl": "6e2164aba3749a46f58dffbc968b9b80fe389bc8781592e878a5db822aa6ad25",
+    "auditor/scenarios/06-cancel-weight-download.jsonl": "7673e3a2f006f343549758e3f068b053a1a4980bdd6c84545619e02eb6bd138b",
+    "auditor/scenarios/07-late-result.jsonl": "ca6fd2b14fa71c808b1aad197ba1d1ab4dd1a6e3f8e32be5c3694409344ae3a6",
+    "auditor/scenarios/08-duplicate-result.jsonl": "d0ae00d2ae78f74ef6033afbd3c951fa23b0839e28ace2ca5959228331a2071d",
+    "auditor/scenarios/09-browser-rejoin.jsonl": "e866872ff44ba4bc1f2df6f0cda3d0fadf426c7414f5e05991384be5f0c94ff1",
+    "auditor/scenarios/10-host-restart.jsonl": "10b80bf9ce903648f32b5ad9f6b777a81a67ef63948b1c458060efb9b3ae6be0",
+    "auditor/scenarios/11-slow-connector.jsonl": "b6dab6764d8383d587df39badac9dc0279d2ff9bf5039792f9684c11fd242a64",
+    "auditor/scenarios/12-interrupted-request.jsonl": "6a09b29263cdd28ada2de74b9041d6017f5e2962aa672a1976b51e538b960bc9",
+    "auditor/scenarios/13-memory-budget.jsonl": "594d67070bb6931ed7a952859cf01671294e9339b6cb562ffec882109ac121fa",
+    "auditor/scenarios/14-row-split-parity.jsonl": "76b2e31ff5025214867cc0d7f828a9045f9282b16d05b00b96d0193a9deb6a51",
+    "auditor/scenarios/15-column-split-parity.jsonl": "20c425da1b4abbc980c98f48e059e0e54e54db1e749aae8244dad23e79f756c4",
+    "auditor/scenarios/16-repeated-generations.jsonl": "dabb5f38d869f1006119a58cae62c5aadd9784a87c60571a075bac0b6cd0e7a1",
+    "auditor/schema/scenario.schema.json": "2a1decf801478942935df05cc23ba5913f7a6c71c5030c9cc59c54ca74623ba9",
+    "auditor/scripts/audit.mjs": "8ed2cf50f8a5b4278abc2352bac71d3e82d31dfa393b3b70c19a44b306f5e637",
+    "auditor/scripts/doctor.mjs": "b4e7643e04cf504bdfc35953b4fefd552472893ed8323686e77ead45120336d1",
+    "auditor/scripts/setup.mjs": "a0b467fa4033e12451740355a20a51eee47200343a30203ba538594e958c572b",
+    "auditor/scripts/test.mjs": "2fc32f0adf9bf20aed77b4d68a766f6381caf866e2fa8a71e2b8f4bd4b59e2f4",
+    "auditor/suites.json": "96bda1527a4170d41f2063fbb88a40b570248154579c08100d15eb9ee385234d",
+    "auditor/tests/concurrency.test.mjs": "a5a2bdbaea3e3fe258e6a485c73b7ee16dc482d5a65be68591f0642414e2abf6",
+    "auditor/tests/failure-reporting.test.mjs": "788eda5c14ae1ac4bfcd2ad9e003a8a8d247aa6499696249203cd2efc6be37f5",
+    "auditor/tests/isolation.test.mjs": "cfe6174da0ff56798e46972cad760d35ea7e0f4e26f845ff7afde12893a41041",
+    "auditor/tests/schema.test.mjs": "a935b0be7ac2ff40e930c3b001459347564f0bb928b55c0372c675ecde7d975f",
+    "auditor/validation.json": "82d7fd9486587861a69d0261a42b7d0720c67132d58f744afa5e817668b5f26e",
+    "docs/scenario-auditing.md": "7660ca7e16c2305d6de8dfbab0f6c264aa2eb151b91ebf1172e87530445378c0"
+  },
+  "nexus_auditor_commit": "1e8258d1ad0ab7cb841c08cfc07886d2b79ca3c3",
+  "node_version": "v24.22.1",
+  "browser_version": "156.0.8078.80",
+  "playwright_version": "1.64.1",
+  "native_rust_tests": 42,
+  "builder_kit_tests": 36,
+  "fast_runs": [
+    {
+      "status": "PASS",
+      "tests": 42,
+      "log_sha256": "25a3767e948995eeaa52a3f55d22efe392ecc0b0c7e75453cdb1d5c35d5fefa1"
+    },
+    {
+      "status": "PASS",
+      "tests": 42,
+      "log_sha256": "fa0f65eff429a189d0afc940a014ef102bc8205e2791d990638c65e4334c3768"
+    },
+    {
+      "status": "PASS",
+      "tests": 42,
+      "log_sha256": "411d7e3d3c7f90ee6b64e1c0762b6bd33788b4cfd053b8b3ffe5423f298cfd40"
+    }
+  ],
+  "model_scenarios": [
+    {
+      "id": "ST-AUDIT-001",
+      "model": "lfm",
+      "status": "PASS",
+      "duration_ms": 6673,
+      "scenario_sha256": "c25d2b0835ea9cc2626a88f3f02f802ecee391838e5bf57a70c7a33926e6485f",
+      "generations": {
+        "answer": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 485.836176,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        }
+      },
+      "fault_events": [
+        {
+          "at_ms": 6633,
+          "type": "cleanup",
+          "passed": true
+        }
+      ],
+      "resources": {
+        "host": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 2342588416,
+          "max_sampled_virtual_bytes": 2759802880
+        },
+        "browser-process": {
+          "process_samples": 7,
+          "max_sampled_rss_bytes": 461574144,
+          "max_sampled_virtual_bytes": 1556661612544
+        }
+      },
+      "raw_result_sha256": "6ec16e83b719008b32f99ac6b8e72de559d2a9d78b9e05747bb1e5a3825e36a6"
+    },
+    {
+      "id": "ST-AUDIT-002",
+      "model": "lfm",
+      "status": "PASS",
+      "duration_ms": 5852,
+      "scenario_sha256": "9095e01b2821e34dfe3f2e3baeb3d616e636b6e5b6b6012cc8c94ee55d645f18",
+      "generations": {
+        "answer": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 564.1047120000001,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        }
+      },
+      "fault_events": [
+        {
+          "at_ms": 5816,
+          "type": "cleanup",
+          "passed": true
+        }
+      ],
+      "resources": {
+        "host": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 2342776832,
+          "max_sampled_virtual_bytes": 2759802880
+        },
+        "browser-process": {
+          "process_samples": 6,
+          "max_sampled_rss_bytes": 460091392,
+          "max_sampled_virtual_bytes": 1556664762368
+        }
+      },
+      "raw_result_sha256": "c86e714502cc4d8f608dcbda1fa08ecab1ccca31bc8fc6583e46b00a4bcf60af"
+    },
+    {
+      "id": "ST-AUDIT-003",
+      "model": "lfm",
+      "status": "PASS",
+      "duration_ms": 9684,
+      "scenario_sha256": "a2e4e398ba5d6dc7ddd35b7c7af9a1f6be9c0e69ab751cf368dfd9bd0babffaa",
+      "generations": {
+        "answer": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 751.579761,
+            "remote_blocks": 8,
+            "remote_shards": 0
+          }
+        }
+      },
+      "fault_events": [
+        {
+          "at_ms": 9645,
+          "type": "cleanup",
+          "passed": true
+        }
+      ],
+      "resources": {
+        "host": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 2411884544,
+          "max_sampled_virtual_bytes": 2831126528
+        },
+        "native-connector": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 160956416,
+          "max_sampled_virtual_bytes": 166129664
+        },
+        "browser-process": {
+          "process_samples": 6,
+          "max_sampled_rss_bytes": 446078976,
+          "max_sampled_virtual_bytes": 1556664758272
+        }
+      },
+      "raw_result_sha256": "39416e97e0d20455dd3855c0e82eb14358310e4a66528423d506473e5fce851c"
+    },
+    {
+      "id": "ST-AUDIT-004",
+      "model": "lfm",
+      "status": "PASS",
+      "duration_ms": 8495,
+      "scenario_sha256": "6be9a3acc2281901f8e4862a9cbe9b65c2508bafc388fc84a737f4d13964b6f8",
+      "generations": {
+        "answer": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 1025.870688,
+            "remote_blocks": 16,
+            "remote_shards": 0
+          }
+        }
+      },
+      "fault_events": [
+        {
+          "at_ms": 8453,
+          "type": "cleanup",
+          "passed": true
+        }
+      ],
+      "resources": {
+        "host": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 2558976000,
+          "max_sampled_virtual_bytes": 3114315776
+        },
+        "native-connector": {
+          "process_samples": 2,
+          "max_sampled_rss_bytes": 160624640,
+          "max_sampled_virtual_bytes": 231194624
+        },
+        "browser-process": {
+          "process_samples": 7,
+          "max_sampled_rss_bytes": 462159872,
+          "max_sampled_virtual_bytes": 1556664111104
+        }
+      },
+      "raw_result_sha256": "1de2c804af3b89ed3cf9a579e431788e3880a5de666f73d6852b6d40f0b8d9a5"
+    },
+    {
+      "id": "ST-AUDIT-005",
+      "model": "lfm",
+      "status": "PASS",
+      "duration_ms": 6486,
+      "scenario_sha256": "6e2164aba3749a46f58dffbc968b9b80fe389bc8781592e878a5db822aa6ad25",
+      "generations": {
+        "first": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 646.900638,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        },
+        "again": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 430.92990399999996,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        }
+      },
+      "fault_events": [
+        {
+          "at_ms": 5492,
+          "type": "fault-hit",
+          "actor": "worker",
+          "id": "perturb",
+          "mode": "hold"
+        },
+        {
+          "at_ms": 5503,
+          "type": "fault-applied",
+          "actor": "worker",
+          "id": "perturb"
+        },
+        {
+          "at_ms": 6448,
+          "type": "cleanup",
+          "passed": true
+        }
+      ],
+      "resources": {
+        "host": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 2342547456,
+          "max_sampled_virtual_bytes": 2690576384
+        },
+        "browser-process": {
+          "process_samples": 6,
+          "max_sampled_rss_bytes": 461942784,
+          "max_sampled_virtual_bytes": 1556664762368
+        }
+      },
+      "raw_result_sha256": "e13d05e0baa4ad2990fe2b6313a62824744f5d1aabf501d0c64213e95292e75c"
+    },
+    {
+      "id": "ST-AUDIT-006",
+      "model": "bonsai",
+      "status": "PASS",
+      "duration_ms": 678922,
+      "scenario_sha256": "7673e3a2f006f343549758e3f068b053a1a4980bdd6c84545619e02eb6bd138b",
+      "generations": {
+        "cancelled": {
+          "tokens": [],
+          "terminal": {
+            "kind": "error",
+            "text": "generation cancelled",
+            "token": null,
+            "tokens": 0,
+            "elapsed_ms": 249.194965,
+            "remote_blocks": 0,
+            "remote_shards": 0
+          }
+        },
+        "recovered": {
+          "tokens": [
+            11
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": ",",
+            "token": null,
+            "tokens": 1,
+            "elapsed_ms": 671155.98864,
+            "remote_blocks": 0,
+            "remote_shards": 4147
+          }
+        }
+      },
+      "fault_events": [
+        {
+          "at_ms": 7498,
+          "type": "fault-hit",
+          "actor": "worker",
+          "id": "perturb",
+          "mode": "hold"
+        },
+        {
+          "at_ms": 7511,
+          "type": "fault-applied",
+          "actor": "worker",
+          "id": "perturb"
+        },
+        {
+          "at_ms": 678847,
+          "type": "cleanup",
+          "passed": true
+        }
+      ],
+      "resources": {
+        "host": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 990818304,
+          "max_sampled_virtual_bytes": 1139392512
+        },
+        "browser-process": {
+          "process_samples": 6,
+          "max_sampled_rss_bytes": 480378880,
+          "max_sampled_virtual_bytes": 1556664762368
+        }
+      },
+      "raw_result_sha256": "d34031acec30dced604257cb3d346a84a299d90d7676bde3563738bc0dcc613d"
+    },
+    {
+      "id": "ST-AUDIT-007",
+      "model": "lfm",
+      "status": "PASS",
+      "duration_ms": 6616,
+      "scenario_sha256": "ca6fd2b14fa71c808b1aad197ba1d1ab4dd1a6e3f8e32be5c3694409344ae3a6",
+      "generations": {
+        "cancelled": {
+          "tokens": [],
+          "terminal": {
+            "kind": "error",
+            "text": "generation cancelled",
+            "token": null,
+            "tokens": 0,
+            "elapsed_ms": 233.923327,
+            "remote_blocks": 0,
+            "remote_shards": 0
+          }
+        },
+        "recovered": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 493.794512,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        }
+      },
+      "fault_events": [
+        {
+          "at_ms": 5898,
+          "type": "fault-hit",
+          "actor": "worker",
+          "id": "perturb",
+          "mode": "hold"
+        },
+        {
+          "at_ms": 5918,
+          "type": "fault-applied",
+          "actor": "worker",
+          "id": "perturb"
+        },
+        {
+          "at_ms": 6568,
+          "type": "cleanup",
+          "passed": true
+        }
+      ],
+      "resources": {
+        "host": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 2342567936,
+          "max_sampled_virtual_bytes": 2690572288
+        },
+        "browser-process": {
+          "process_samples": 6,
+          "max_sampled_rss_bytes": 454103040,
+          "max_sampled_virtual_bytes": 1556662136832
+        }
+      },
+      "raw_result_sha256": "d2cf457dbd439f1cc3b8bcf518db5382560e18c0a7a022e43d683f09039e5abe"
+    },
+    {
+      "id": "ST-AUDIT-008",
+      "model": "lfm",
+      "status": "PASS",
+      "duration_ms": 6414,
+      "scenario_sha256": "d0ae00d2ae78f74ef6033afbd3c951fa23b0839e28ace2ca5959228331a2071d",
+      "generations": {
+        "answer": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 555.1338649999999,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        },
+        "again": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 469.68657,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        }
+      },
+      "fault_events": [
+        {
+          "at_ms": 5488,
+          "type": "fault-hit",
+          "actor": "worker",
+          "id": "perturb",
+          "mode": "duplicate"
+        },
+        {
+          "at_ms": 5491,
+          "type": "duplicate-response",
+          "actor": "worker",
+          "id": "perturb",
+          "status": 409
+        },
+        {
+          "at_ms": 5491,
+          "type": "fault-applied",
+          "actor": "worker",
+          "id": "perturb"
+        },
+        {
+          "at_ms": 6376,
+          "type": "cleanup",
+          "passed": true
+        }
+      ],
+      "resources": {
+        "host": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 2342703104,
+          "max_sampled_virtual_bytes": 2690572288
+        },
+        "browser-process": {
+          "process_samples": 6,
+          "max_sampled_rss_bytes": 464809984,
+          "max_sampled_virtual_bytes": 1556664758272
+        }
+      },
+      "raw_result_sha256": "31ef51f7a68dce4dccca7fde6fbf48b19252363b39c231141817f3526d49ae24"
+    },
+    {
+      "id": "ST-AUDIT-009",
+      "model": "lfm",
+      "status": "PASS",
+      "duration_ms": 10149,
+      "scenario_sha256": "e866872ff44ba4bc1f2df6f0cda3d0fadf426c7414f5e05991384be5f0c94ff1",
+      "generations": {
+        "before": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 463.672477,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        },
+        "after": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 561.556235,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        }
+      },
+      "fault_events": [
+        {
+          "at_ms": 10114,
+          "type": "cleanup",
+          "passed": true
+        }
+      ],
+      "resources": {
+        "host": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 2348298240,
+          "max_sampled_virtual_bytes": 2833219584
+        },
+        "browser-process": {
+          "process_samples": 7,
+          "max_sampled_rss_bytes": 454680576,
+          "max_sampled_virtual_bytes": 1556664758272
+        }
+      },
+      "raw_result_sha256": "887188ca6eec85188676bb6aad310c4c6420651458a1db245b18c41d05e0048e"
+    },
+    {
+      "id": "ST-AUDIT-010",
+      "model": "lfm",
+      "status": "PASS",
+      "duration_ms": 11168,
+      "scenario_sha256": "10b80bf9ce903648f32b5ad9f6b777a81a67ef63948b1c458060efb9b3ae6be0",
+      "generations": {
+        "before": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 442.989438,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        },
+        "after": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 526.316408,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        }
+      },
+      "fault_events": [
+        {
+          "at_ms": 11131,
+          "type": "cleanup",
+          "passed": true
+        }
+      ],
+      "resources": {
+        "host": {
+          "process_samples": 2,
+          "max_sampled_rss_bytes": 2342645760,
+          "max_sampled_virtual_bytes": 2759798784
+        },
+        "browser-process": {
+          "process_samples": 7,
+          "max_sampled_rss_bytes": 460435456,
+          "max_sampled_virtual_bytes": 1556664758272
+        }
+      },
+      "raw_result_sha256": "6b6fac2be54410dd7363baa75d593b7259b2480aadf27b1716535bb16391e53e"
+    },
+    {
+      "id": "ST-AUDIT-011",
+      "model": "lfm",
+      "status": "PASS",
+      "duration_ms": 6307,
+      "scenario_sha256": "b6dab6764d8383d587df39badac9dc0279d2ff9bf5039792f9684c11fd242a64",
+      "generations": {
+        "answer": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 957.9724080000001,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        }
+      },
+      "fault_events": [
+        {
+          "at_ms": 5315,
+          "type": "fault-hit",
+          "actor": "worker",
+          "id": "perturb",
+          "mode": "delay"
+        },
+        {
+          "at_ms": 5717,
+          "type": "fault-applied",
+          "actor": "worker",
+          "id": "perturb"
+        },
+        {
+          "at_ms": 6268,
+          "type": "cleanup",
+          "passed": true
+        }
+      ],
+      "resources": {
+        "host": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 2342543360,
+          "max_sampled_virtual_bytes": 2690572288
+        },
+        "browser-process": {
+          "process_samples": 6,
+          "max_sampled_rss_bytes": 453955584,
+          "max_sampled_virtual_bytes": 1556664762368
+        }
+      },
+      "raw_result_sha256": "59c11007e3453eaf14dc07d163367c53b47bab8dd461084217c1e4f63341f5e4"
+    },
+    {
+      "id": "ST-AUDIT-012",
+      "model": "lfm",
+      "status": "PASS",
+      "duration_ms": 9599,
+      "scenario_sha256": "6a09b29263cdd28ada2de74b9041d6017f5e2962aa672a1976b51e538b960bc9",
+      "generations": {
+        "recovered": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 636.52519,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        }
+      },
+      "fault_events": [
+        {
+          "at_ms": 5132,
+          "type": "fault-hit",
+          "actor": "worker",
+          "id": "perturb",
+          "mode": "abort"
+        },
+        {
+          "at_ms": 5132,
+          "type": "fault-applied",
+          "actor": "worker",
+          "id": "perturb"
+        },
+        {
+          "at_ms": 9548,
+          "type": "cleanup",
+          "passed": true
+        }
+      ],
+      "resources": {
+        "host": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 2342883328,
+          "max_sampled_virtual_bytes": 2759794688
+        },
+        "browser-process": {
+          "process_samples": 7,
+          "max_sampled_rss_bytes": 453537792,
+          "max_sampled_virtual_bytes": 1556664696832
+        }
+      },
+      "raw_result_sha256": "2cb89ade79599ccb100308bc7a48c17545f3d351ad713a7f2e2d4810c7303b4d"
+    },
+    {
+      "id": "ST-AUDIT-013",
+      "model": "lfm",
+      "status": "PASS",
+      "duration_ms": 6685,
+      "scenario_sha256": "594d67070bb6931ed7a952859cf01671294e9339b6cb562ffec882109ac121fa",
+      "generations": {
+        "answer": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 733.8670579999999,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        }
+      },
+      "fault_events": [
+        {
+          "at_ms": 6641,
+          "type": "cleanup",
+          "passed": true
+        }
+      ],
+      "resources": {
+        "host": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 2342330368,
+          "max_sampled_virtual_bytes": 2690572288
+        },
+        "native-connector": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 160563200,
+          "max_sampled_virtual_bytes": 166154240
+        }
+      },
+      "raw_result_sha256": "fee041926eeca18ff90bdea4056f786d66c633662d56a1e08233bab989980304"
+    },
+    {
+      "id": "ST-AUDIT-014",
+      "model": "bonsai",
+      "status": "PASS",
+      "duration_ms": 175247,
+      "scenario_sha256": "76b2e31ff5025214867cc0d7f828a9045f9282b16d05b00b96d0193a9deb6a51",
+      "generations": {
+        "reference": {
+          "tokens": [
+            11
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": ",",
+            "token": null,
+            "tokens": 1,
+            "elapsed_ms": 25366.499402999998,
+            "remote_blocks": 0,
+            "remote_shards": 0
+          }
+        },
+        "distributed": {
+          "tokens": [
+            11
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": ",",
+            "token": null,
+            "tokens": 1,
+            "elapsed_ms": 142482.87909,
+            "remote_blocks": 0,
+            "remote_shards": 4147
+          }
+        }
+      },
+      "fault_events": [
+        {
+          "at_ms": 175161,
+          "type": "matrix-participation",
+          "actors": [
+            {
+              "name": "one",
+              "kind": "native",
+              "matrix_weight_fetches": 1047
+            },
+            {
+              "name": "two",
+              "kind": "native",
+              "matrix_weight_fetches": 1024
+            },
+            {
+              "name": "three",
+              "kind": "native",
+              "matrix_weight_fetches": 1047
+            },
+            {
+              "name": "four",
+              "kind": "native",
+              "matrix_weight_fetches": 1029
+            }
+          ]
+        },
+        {
+          "at_ms": 175196,
+          "type": "cleanup",
+          "passed": true
+        }
+      ],
+      "resources": {
+        "host": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 1006333952,
+          "max_sampled_virtual_bytes": 1206501376
+        },
+        "native-connector": {
+          "process_samples": 4,
+          "max_sampled_rss_bytes": 16068608,
+          "max_sampled_virtual_bytes": 22188032
+        }
+      },
+      "raw_result_sha256": "b9c59b5a39cee68cf6cadfc4570b18fb3e198a957b3063890906add4afb57f2a"
+    },
+    {
+      "id": "ST-AUDIT-015",
+      "model": "bonsai",
+      "status": "PASS",
+      "duration_ms": 213234,
+      "scenario_sha256": "20c425da1b4abbc980c98f48e059e0e54e54db1e749aae8244dad23e79f756c4",
+      "generations": {
+        "reference": {
+          "tokens": [
+            11
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": ",",
+            "token": null,
+            "tokens": 1,
+            "elapsed_ms": 26151.19396,
+            "remote_blocks": 0,
+            "remote_shards": 0
+          }
+        },
+        "distributed": {
+          "tokens": [
+            11
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": ",",
+            "token": null,
+            "tokens": 1,
+            "elapsed_ms": 180363.91426700001,
+            "remote_blocks": 0,
+            "remote_shards": 2728
+          }
+        }
+      },
+      "fault_events": [
+        {
+          "at_ms": 213087,
+          "type": "matrix-participation",
+          "actors": [
+            {
+              "name": "one",
+              "kind": "native",
+              "matrix_weight_fetches": 792
+            },
+            {
+              "name": "two",
+              "kind": "native",
+              "matrix_weight_fetches": 786
+            },
+            {
+              "name": "three",
+              "kind": "browser",
+              "matrix_weight_fetches": 576
+            },
+            {
+              "name": "four",
+              "kind": "browser",
+              "matrix_weight_fetches": 574
+            }
+          ]
+        },
+        {
+          "at_ms": 213170,
+          "type": "cleanup",
+          "passed": true
+        }
+      ],
+      "resources": {
+        "host": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 1065877504,
+          "max_sampled_virtual_bytes": 1344921600
+        },
+        "native-connector": {
+          "process_samples": 2,
+          "max_sampled_rss_bytes": 23502848,
+          "max_sampled_virtual_bytes": 30162944
+        },
+        "browser-process": {
+          "process_samples": 7,
+          "max_sampled_rss_bytes": 453922816,
+          "max_sampled_virtual_bytes": 1556665942016
+        }
+      },
+      "raw_result_sha256": "1cc02ba5eb6694f33c10c81ed18c1da64c49c015c14d384829275a48569e6a39"
+    },
+    {
+      "id": "ST-AUDIT-016",
+      "model": "lfm",
+      "status": "PASS",
+      "duration_ms": 7269,
+      "scenario_sha256": "dabb5f38d869f1006119a58cae62c5aadd9784a87c60571a075bac0b6cd0e7a1",
+      "generations": {
+        "warm": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 649.553169,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        },
+        "second": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 434.238077,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        },
+        "third": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 442.154275,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        },
+        "fourth": {
+          "tokens": [
+            52572,
+            7
+          ],
+          "terminal": {
+            "kind": "done",
+            "text": "hello",
+            "token": null,
+            "tokens": 2,
+            "elapsed_ms": 442.453297,
+            "remote_blocks": 4,
+            "remote_shards": 0
+          }
+        }
+      },
+      "fault_events": [
+        {
+          "at_ms": 7123,
+          "type": "memory-growth",
+          "growth_bytes": -1597440,
+          "limit_bytes": 134217728
+        },
+        {
+          "at_ms": 7233,
+          "type": "cleanup",
+          "passed": true
+        }
+      ],
+      "resources": {
+        "host": {
+          "process_samples": 1,
+          "max_sampled_rss_bytes": 2342588416,
+          "max_sampled_virtual_bytes": 2759802880
+        },
+        "browser-process": {
+          "process_samples": 6,
+          "max_sampled_rss_bytes": 463253504,
+          "max_sampled_virtual_bytes": 1556664762368
+        }
+      },
+      "raw_result_sha256": "4f187a1612bf612dd5001c19e43d92d2174c35d6f21d2e0f7863214b2865a1f3"
+    }
+  ],
+  "host_sha256": "691114853577e6398a32eeb8393ec2a52de6e0a820e42985c96aaab9dc7fae33",
+  "connector_sha256": "81093427f38d2cbbd6df9c2bc58dcd9a0022d963e31609c8a2441eef57f28744",
+  "wasm_sha256": "5fdd7dcfb46f7ee768a3aaa1a8c74e67d5bdcfd76297e3c560b0c010a2d2ce2e",
+  "limits": {
+    "maximum_connectors": 4,
+    "native_virtual_address_cap_bytes": 1000000000,
+    "browser_hard_cap": false,
+    "cpu_hard_quota": false,
+    "memory_sampling_ms": 100
+  },
+  "limitations": [
+    "Application-request timing/failure simulation on loopback, not physical LAN or packet-level validation.",
+    "Exact pinned legacy Ternary Bonsai artifact and LFM only, not Bonsai2 or arbitrary GGUFs.",
+    "Token parity plus preserved runtime matrix-reference checks, not a new independent full-logit reference run.",
+    "Browser memory sampled, not hard-capped. Host memory is separate.",
+    "No speedup, production uptime, arbitrary prompts, mobile/TV or physical device certification.",
+    "Setup validated with connector-materialized, Git-blob-verified NexusAuditor source. Authenticated private Git install route not exercised here."
+  ],
+  "repaired_harness_failures": [
+    "Browser cleanup raced context shutdown; unified owned-browser cleanup.",
+    "DevTools response body capture failed for streaming UI; observe a clone of the actual response in-page.",
+    "Built-in fetch had implicit 300000ms stream timeout; explicit scenario deadline now governs Node HTTP inference stream.",
+    "Normalized/symlink artifact paths are restricted to auditor/.runs.",
+    "Host-only reference scenarios explicitly request zero remote connectors; preflight rejects contradictory inputs."
+  ],
+  "delivery": "Source ready for authorized guarded push; remote commit and post-push smoke reported separately.",
+  "delivery_documentation_sha256": {
+    "CHANGELOG.md": "d31bb57049cb263ef2e63cdd9d031e4d20bc6cc7b1e570702e656673ec70be76",
+    ".agent/memory.md": "baf076a761fdc63c2eb1a9420531a5dbd9b90ceff45f9178dcadbce6b7aaf5e1"
+  }
+}

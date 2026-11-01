@@ -64,3 +64,11 @@ Before development, load the builder kit in the actual executor and read
 [AGENTS.md](AGENTS.md). Kit installation, invocation, source checks and real-model
 proof are separate evidence claims. No tags, release assets or deployment are
 created merely by passing tests.
+
+## Scenario audit package
+
+The root [auditor](auditor/README.md) runs JSONL-defined user journeys through
+NexusAuditor and a sandbox-local Node adapter. It covers overlap, timing,
+cancellation, reconnection and real-model correctness without a separate LAN
+simulation module. See the package's acceptance evidence for current results;
+scenario files alone are not proof that their checks passed.

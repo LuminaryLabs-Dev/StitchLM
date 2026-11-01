@@ -1,0 +1,7 @@
+{"id": "ST-AUDIT-015", "name": "column split parity", "models": ["bonsai"], "timeout_ms": 1800000}
+{"do": "host.start"}
+{"do": "parallel", "steps": [{"do": "join", "actor": "one", "kind": "native"}, {"do": "join", "actor": "two", "kind": "native"}, {"do": "join", "actor": "three", "kind": "browser"}, {"do": "join", "actor": "four", "kind": "browser"}]}
+{"do": "generate", "id": "reference", "request": {"local_only": true, "connector_count": 0}, "expect": [{"field": "kind", "equals": "done"}, {"field": "text", "equals": ","}]}
+{"do": "generate", "id": "distributed", "request": {"split_axis": "columns"}, "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_shards", "gt": 0}, {"field": "text", "equals": ","}]}
+{"do": "assert.tokens", "left": "reference", "right": "distributed"}
+{"do": "assert.participation", "minimum": 4}

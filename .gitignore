@@ -13,3 +13,8 @@
 
 __pycache__/
 *.pyc
+
+# Scenario audit local state and dependencies
+auditor/node_modules/
+auditor/.venv/
+auditor/.runs/

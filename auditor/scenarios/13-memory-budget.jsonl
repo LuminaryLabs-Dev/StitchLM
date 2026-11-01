@@ -1,0 +1,6 @@
+{"id": "ST-AUDIT-013", "name": "memory budget", "models": ["lfm"], "timeout_ms": 300000}
+{"do": "host.start"}
+{"do": "api", "path": "/api/register", "data": {"protocol": 1, "name": "probe", "kind": "native", "memory_budget_mb": 1}, "auth": "pair", "expect": [{"field": "status", "equals": 400}]}
+{"do": "join", "actor": "worker", "kind": "native"}
+{"do": "generate", "id": "answer", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}]}
+{"do": "assert.alive"}

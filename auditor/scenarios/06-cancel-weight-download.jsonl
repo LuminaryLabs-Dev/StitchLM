@@ -1,0 +1,14 @@
+{"id": "ST-AUDIT-006", "name": "cancel weight download", "models": ["bonsai"], "timeout_ms": 1800000}
+{"do": "host.start"}
+{"do": "join", "actor": "worker", "kind": "browser"}
+{"do": "fault", "actor": "worker", "id": "perturb", "path": "/shard-weights/", "mode": "hold"}
+{"do": "generate", "id": "cancelled", "background": true}
+{"do": "wait.event", "type": "fault-hit", "actor": "worker", "id": "perturb"}
+{"do": "cancel"}
+{"do": "await", "id": "cancelled", "expect": [{"field": "kind", "equals": "error"}, {"field": "text", "contains": "cancelled"}]}
+{"do": "release", "actor": "worker", "id": "perturb"}
+{"do": "assert.event", "type": "fault-hit", "id": "perturb"}
+{"do": "wait.event", "type": "fault-applied", "id": "perturb"}
+{"do": "assert.event", "type": "response", "actor": "worker", "status": 409}
+{"do": "wait.ready", "count": 1}
+{"do": "generate", "id": "recovered", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_shards", "gt": 0}, {"field": "text", "equals": ","}]}

@@ -1,0 +1,6 @@
+{
+  "fast": { "kind": "harness", "models": [] },
+  "lfm": { "kind": "model", "models": ["lfm"] },
+  "bonsai": { "kind": "model", "models": ["bonsai"] },
+  "full": { "kind": "model", "models": ["lfm", "bonsai"] }
+}

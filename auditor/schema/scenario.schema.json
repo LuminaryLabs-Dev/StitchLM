@@ -1,0 +1,767 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "minItems": 2,
+  "items": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "models",
+        "timeout_ms"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "models": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "lfm",
+              "bonsai",
+              "fixture"
+            ]
+          }
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 1800000
+        }
+      }
+    }
+  ],
+  "additionalItems": {
+    "$ref": "#/$defs/action"
+  },
+  "$defs": {
+    "action": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "host.start"
+            }
+          },
+          "required": [
+            "do"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "host.restart"
+            }
+          },
+          "required": [
+            "do"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "join"
+            },
+            "actor": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            },
+            "kind": {
+              "enum": [
+                "native",
+                "browser"
+              ]
+            },
+            "memory_mb": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 953
+            }
+          },
+          "required": [
+            "do",
+            "actor",
+            "kind"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "leave"
+            },
+            "actor": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            }
+          },
+          "required": [
+            "do",
+            "actor"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "parallel"
+            },
+            "steps": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 4,
+              "items": {
+                "$ref": "#/$defs/action"
+              }
+            }
+          },
+          "required": [
+            "do",
+            "steps"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "delay"
+            },
+            "ms": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1800000
+            }
+          },
+          "required": [
+            "do",
+            "ms"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "generate"
+            },
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            },
+            "background": {
+              "type": "boolean"
+            },
+            "request": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "prompt": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "max_tokens": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 128
+                },
+                "raw_prompt": {
+                  "type": "boolean"
+                },
+                "local_only": {
+                  "type": "boolean"
+                },
+                "connector_count": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4
+                },
+                "split_axis": {
+                  "enum": [
+                    "rows",
+                    "columns"
+                  ]
+                },
+                "working_memory_bytes": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1000000000
+                }
+              }
+            },
+            "expect": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "equals": {},
+                  "contains": {},
+                  "gt": {
+                    "type": "number"
+                  },
+                  "lte": {
+                    "type": "number"
+                  }
+                },
+                "anyOf": [
+                  {
+                    "required": [
+                      "equals"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "contains"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "gt"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "lte"
+                    ]
+                  }
+                ]
+              }
+            },
+            "expect_status": {
+              "type": "integer",
+              "minimum": 100,
+              "maximum": 599
+            },
+            "via": {
+              "enum": [
+                "api",
+                "console"
+              ]
+            }
+          },
+          "required": [
+            "do",
+            "id"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "await"
+            },
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            },
+            "expect": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "equals": {},
+                  "contains": {},
+                  "gt": {
+                    "type": "number"
+                  },
+                  "lte": {
+                    "type": "number"
+                  }
+                },
+                "anyOf": [
+                  {
+                    "required": [
+                      "equals"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "contains"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "gt"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "lte"
+                    ]
+                  }
+                ]
+              }
+            },
+            "expect_status": {
+              "type": "integer",
+              "minimum": 100,
+              "maximum": 599
+            }
+          },
+          "required": [
+            "do",
+            "id"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "cancel"
+            }
+          },
+          "required": [
+            "do"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "wait.active"
+            },
+            "timeout_ms": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1800000
+            }
+          },
+          "required": [
+            "do"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "wait.ready"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4
+            },
+            "timeout_ms": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1800000
+            }
+          },
+          "required": [
+            "do",
+            "count"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "fault"
+            },
+            "actor": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            },
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            },
+            "path": {
+              "type": "string",
+              "pattern": "^/"
+            },
+            "method": {
+              "enum": [
+                "GET",
+                "POST"
+              ]
+            },
+            "mode": {
+              "enum": [
+                "hold",
+                "delay",
+                "abort",
+                "duplicate"
+              ]
+            },
+            "ms": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1800000
+            }
+          },
+          "required": [
+            "do",
+            "actor",
+            "id",
+            "path",
+            "mode"
+          ],
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "mode": {
+                    "const": "delay"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "ms"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "wait.event"
+            },
+            "type": {
+              "type": "string",
+              "minLength": 1
+            },
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            },
+            "actor": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            },
+            "timeout_ms": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1800000
+            }
+          },
+          "required": [
+            "do",
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "release"
+            },
+            "actor": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            },
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            }
+          },
+          "required": [
+            "do",
+            "actor",
+            "id"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "api"
+            },
+            "path": {
+              "type": "string",
+              "pattern": "^/api/"
+            },
+            "data": {},
+            "auth": {
+              "enum": [
+                "admin",
+                "pair",
+                "none",
+                "wrong"
+              ]
+            },
+            "save": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            },
+            "expect": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "equals": {},
+                  "contains": {},
+                  "gt": {
+                    "type": "number"
+                  },
+                  "lte": {
+                    "type": "number"
+                  }
+                },
+                "anyOf": [
+                  {
+                    "required": [
+                      "equals"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "contains"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "gt"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "lte"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "do",
+            "path",
+            "expect"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "assert"
+            },
+            "from": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            },
+            "expect": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "equals": {},
+                  "contains": {},
+                  "gt": {
+                    "type": "number"
+                  },
+                  "lte": {
+                    "type": "number"
+                  }
+                },
+                "anyOf": [
+                  {
+                    "required": [
+                      "equals"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "contains"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "gt"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "lte"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "do",
+            "from",
+            "expect"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "assert.tokens"
+            },
+            "left": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            },
+            "right": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            }
+          },
+          "required": [
+            "do",
+            "left",
+            "right"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "assert.alive"
+            }
+          },
+          "required": [
+            "do"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "assert.event"
+            },
+            "type": {
+              "type": "string",
+              "minLength": 1
+            },
+            "actor": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            },
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            },
+            "status": {
+              "type": "integer"
+            },
+            "minimum": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "do",
+            "type"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "checkpoint.metrics"
+            },
+            "save": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            }
+          },
+          "required": [
+            "do",
+            "save"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "assert.memory"
+            },
+            "from": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,79}$"
+            },
+            "max_growth_bytes": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "do",
+            "from",
+            "max_growth_bytes"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "do": {
+              "const": "assert.participation"
+            },
+            "minimum": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4
+            }
+          },
+          "required": [
+            "do",
+            "minimum"
+          ]
+        }
+      ]
+    }
+  }
+}

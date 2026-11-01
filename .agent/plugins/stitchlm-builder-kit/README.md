@@ -48,3 +48,11 @@ node .agent/plugins/stitchlm-builder-kit/scripts/stitchlm-builder.mjs integrate 
 ```
 
 Integration requires an immutable request `integration` contract (see protocol); no automatic source changes on validation success. This supplies a scoped integration step without forcing every future outcome into manual handoff. Recheck current ownership before integration; no global repository lock is implied by a run lock.
+
+## Scenario validation
+
+The root `auditor/README.md` is the canonical scenario execution guide. During
+Stage 3, use its pinned NexusAuditor entry point and local Node adapter for the
+approved host/connector journeys. Scenarios own timing and failures. Do not
+introduce a separate LANLint module or treat synthetic harness tests as real-model
+proof. Changes to this plugin require reinstalling and refreshing its load receipt.

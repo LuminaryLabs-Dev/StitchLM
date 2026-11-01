@@ -1,0 +1,5 @@
+{"id": "ST-AUDIT-004", "name": "simultaneous joins", "models": ["lfm"], "timeout_ms": 300000}
+{"do": "host.start"}
+{"do": "parallel", "steps": [{"do": "join", "actor": "one", "kind": "native"}, {"do": "join", "actor": "two", "kind": "browser"}, {"do": "join", "actor": "three", "kind": "native"}, {"do": "join", "actor": "four", "kind": "browser"}]}
+{"do": "wait.ready", "count": 4}
+{"do": "generate", "id": "answer", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}]}

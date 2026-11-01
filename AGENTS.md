@@ -60,3 +60,13 @@ receipt. Preserve tokenization, state reset, reference tolerances, raw/chat prom
 modes and separate remote_shards telemetry. Do not turn the native low-memory
 measurements into a total-browser-memory or speed guarantee. The C++ harness under
 tests is an independent external reference, never a production backend.
+
+## Scenario-auditor phase
+
+The user authorized the attached three-outcome plan on 2026-11-01: root auditor
+package, real JSONL scenario validation in the sandbox, then a guarded connector
+push to main after required checks pass. Scope is the auditor, tests, documentation
+and builder-kit validation guidance; it does not authorize unrelated runtime
+redesigns, shared NexusAuditor changes, LAN trust/firewall modifications or release
+publication. Use `auditor/README.md`. No separate LANLint module. Missing evidence
+keeps the phase open. Preserve the four-connector/native 1 GB test boundary.

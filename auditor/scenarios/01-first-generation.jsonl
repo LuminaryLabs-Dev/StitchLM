@@ -1,0 +1,5 @@
+{"id": "ST-AUDIT-001", "name": "first generation", "models": ["lfm"], "timeout_ms": 300000}
+{"do": "host.start"}
+{"do": "join", "actor": "worker", "kind": "browser"}
+{"do": "generate", "id": "answer", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}], "via": "console"}
+{"do": "assert", "from": "answer", "expect": [{"field": "events.0.kind", "equals": "token"}]}

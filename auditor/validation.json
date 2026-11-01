@@ -1,0 +1,8 @@
+{
+  "allowed_origins": ["http://127.0.0.1:8787"],
+  "required_tools": ["node"],
+  "required_env": [],
+  "scenario_files": [],
+  "runs_dir": "auditor/.runs",
+  "services": {}
+}

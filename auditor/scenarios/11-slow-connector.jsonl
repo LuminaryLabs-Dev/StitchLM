@@ -1,0 +1,6 @@
+{"id": "ST-AUDIT-011", "name": "slow connector", "models": ["lfm"], "timeout_ms": 300000}
+{"do": "host.start"}
+{"do": "join", "actor": "worker", "kind": "browser"}
+{"do": "fault", "actor": "worker", "id": "perturb", "path": "/result", "mode": "delay", "ms": 400}
+{"do": "generate", "id": "answer", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}]}
+{"do": "assert.event", "type": "fault-applied", "id": "perturb"}

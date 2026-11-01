@@ -1,0 +1,3 @@
+# Private repository access is required. For connector-materialized source,
+# setup accepts --auditor-source and verifies every tracked blob against the pin.
+nexus-auditor @ git+https://github.com/LuminaryLabs-Dev/NexusAuditor.git@1e8258d1ad0ab7cb841c08cfc07886d2b79ca3c3

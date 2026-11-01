@@ -8,3 +8,11 @@ description: Validate StitchLM evidence and regressions.
 Resume Stage3 using independent authorized checks against actual candidate bytes. Capture commands, environment and raw results. Apply defined numerical tolerances and single-host then two-worker order for future inference work. Synthetic harness tests prove only harness behavior. External numerical/model/hardware/benchmark gates require configured actual validation commands, bound receipts and raw evidence; missing resources block. No worker assertion substitutes for evidence. Defect -> build, assumption -> inspect/define, missing resource -> BLOCKED; respect iteration budget.
 
 Read [protocol](../../references/protocol.md) and [engineering contract](../../references/engineering.md). Operate one bounded outcome at a time, preserve evidence, and report blockers without fabricating progress.
+
+For authorized StitchLM host/connector changes, load the root auditor instructions
+in `auditor/README.md`. Run `node auditor/scripts/audit.mjs fast`, followed by the
+applicable real-model suite and full acceptance when the outcome requires it.
+Retain NexusAuditor and per-scenario results. Missing models/builds/browser access
+are BLOCKED, not PASS; a filtered suite is not full acceptance. Keep the existing
+Rust and independent model regressions. The Node adapter orchestrates the Rust
+runtime and must not replace it. Faults, delays and overlap belong in JSONL.

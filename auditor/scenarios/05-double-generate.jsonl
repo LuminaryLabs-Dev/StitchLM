@@ -1,0 +1,10 @@
+{"id": "ST-AUDIT-005", "name": "double generate", "models": ["lfm"], "timeout_ms": 300000}
+{"do": "host.start"}
+{"do": "join", "actor": "worker", "kind": "browser"}
+{"do": "fault", "actor": "worker", "id": "perturb", "path": "/result", "mode": "hold"}
+{"do": "generate", "id": "first", "background": true}
+{"do": "wait.event", "type": "fault-hit", "actor": "worker", "id": "perturb"}
+{"do": "generate", "id": "second", "expect_status": 409}
+{"do": "release", "actor": "worker", "id": "perturb"}
+{"do": "await", "id": "first", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}]}
+{"do": "generate", "id": "again", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}]}

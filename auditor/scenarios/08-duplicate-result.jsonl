@@ -1,0 +1,7 @@
+{"id": "ST-AUDIT-008", "name": "duplicate result", "models": ["lfm"], "timeout_ms": 300000}
+{"do": "host.start"}
+{"do": "join", "actor": "worker", "kind": "browser"}
+{"do": "fault", "actor": "worker", "id": "perturb", "path": "/result", "mode": "duplicate"}
+{"do": "generate", "id": "answer", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}]}
+{"do": "wait.event", "type": "duplicate-response", "id": "perturb"}
+{"do": "generate", "id": "again", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}]}

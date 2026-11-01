@@ -1,0 +1,12 @@
+{"id": "ST-AUDIT-007", "name": "late result", "models": ["lfm"], "timeout_ms": 300000}
+{"do": "host.start"}
+{"do": "join", "actor": "worker", "kind": "browser"}
+{"do": "fault", "actor": "worker", "id": "perturb", "path": "/result", "mode": "hold"}
+{"do": "generate", "id": "cancelled", "background": true}
+{"do": "wait.event", "type": "fault-hit", "actor": "worker", "id": "perturb"}
+{"do": "cancel"}
+{"do": "await", "id": "cancelled", "expect": [{"field": "kind", "equals": "error"}]}
+{"do": "release", "actor": "worker", "id": "perturb"}
+{"do": "wait.event", "type": "fault-applied", "id": "perturb"}
+{"do": "wait.ready", "count": 1}
+{"do": "generate", "id": "recovered", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}]}

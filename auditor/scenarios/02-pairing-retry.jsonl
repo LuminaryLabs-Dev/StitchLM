@@ -1,0 +1,5 @@
+{"id": "ST-AUDIT-002", "name": "pairing retry", "models": ["lfm"], "timeout_ms": 300000}
+{"do": "host.start"}
+{"do": "api", "path": "/api/register", "data": {"protocol": 1, "name": "probe", "kind": "native", "memory_budget_mb": 953}, "auth": "wrong", "expect": [{"field": "status", "equals": 401}]}
+{"do": "join", "actor": "worker", "kind": "browser"}
+{"do": "generate", "id": "answer", "expect": [{"field": "kind", "equals": "done"}, {"field": "remote_blocks", "gt": 0}, {"field": "text", "equals": "hello"}]}
